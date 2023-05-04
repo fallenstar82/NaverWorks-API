@@ -542,46 +542,51 @@ def getGroupLists(domainId, count, cursor, groupId, jsonFormat, AccToken):
 
     result = requests.get(url, headers=header, params=params).json()
 
+    
     if __name__ != "__main__":
         return result
-    if jsonFormat:
-        pprint.pprint(result)
-    else:
-        if groupId == None:
-            print("%-40s %-30s" % ("Group ID", "Group Name"))
-            print("------------------------------------------------------------------")
-            for groupInfo in result["groups"]:
-                print("%-40s %-30s" % (groupInfo["groupId"], groupInfo["groupName"]))
-            if (result["responseMetaData"]["nextCursor"] != None): 
-                print("------------------------------------------------------------------")
-                print("Next Cursor Option: " + result["responseMetaData"]["nextCursor"])
+    if 'code' not in result:
+        if jsonFormat:
+            pprint.pprint(result)
         else:
-            print(result["groupName"] + " (" + result["groupId"] + ")")
-            print("="*50)
-            print("Group Email : " + "No Emails" if result["groupEmail"] == None else result["groupEmail"]) 
-            print("Group Functions : ")
-            print((" Message" if result["useMessage"] else "") + 
-                  (" Calendar" if result["useCalendar"] else "") +
-                  (" Folder" if result["useFolder"] else "") +
-                  (" Mail" if result["useMail"] else "") +
-                  (" Note" if result["useNote"] else "") +
-                  (" Task" if result["useTask"] else "") )
-            print("Group Administrators : ")
-            for admin in (result["administrators"]):
-                print("  %-40s" % (admin["userId"]))
-            print("Grpup Descripton")
-            print(" %s" % result["description"])
-            print("---Group Members"+ "-"*40)
-            for members in (result["members"]):
-                print("  %-40s - %10s" % (members["id"], members["type"]))
+            if groupId == None:
+                print("%-40s %-30s" % ("Group ID", "Group Name"))
+                print("------------------------------------------------------------------")
+                for groupInfo in result["groups"]:
+                    print("%-40s %-30s" % (groupInfo["groupId"], groupInfo["groupName"]))
+                if (result["responseMetaData"]["nextCursor"] != None): 
+                    print("------------------------------------------------------------------")
+                    print("Next Cursor Option: " + result["responseMetaData"]["nextCursor"])
+            else:
+                print(result["groupName"] + " (" + result["groupId"] + ")")
+                print("="*50)
+                print("Group Email : " + "No Emails" if result["groupEmail"] == None else result["groupEmail"]) 
+                print("Group Functions : ")
+                print((" Message" if result["useMessage"] else "") + 
+                    (" Calendar" if result["useCalendar"] else "") +
+                    (" Folder" if result["useFolder"] else "") +
+                    (" Mail" if result["useMail"] else "") +
+                    (" Note" if result["useNote"] else "") +
+                    (" Task" if result["useTask"] else "") )
+                print("Group Administrators : ")
+                for admin in (result["administrators"]):
+                    print("  %-40s" % (admin["userId"]))
+                print("Grpup Descripton")
+                print(" %s" % result["description"])
+                print("---Group Members"+ "-"*40)
+                for members in (result["members"]):
+                    print("  %-40s - %10s" % (members["id"], members["type"]))
+    else:
+        print("CODE : " + result["code"])
+        print("DESC : " + result["description"])
 
-def postGroup(domainId, groupName, description, serviceNotification,
-              serviceManagement, externalKey, administrators,
-              useMessage, useNote, useCalendar, useTask, useFolder,
-              useMail, groupEmail, members, AccToken ):
+def postGroup(domainId :int, groupName :str, description :str, serviceNotification :bool,
+              serviceManagement :bool, externalKey :str, administrators :list,
+              useMessage :bool, useNote :bool, useCalendar :bool, useTask :bool, useFolder :bool,
+              useMail :bool, groupEmail :str, members :list, AccToken :str ):
     if useMessage == False:
         if useNote == True or useCalendar == True or useTask == True or useFolder == True:
-            print("Using group Note, Calendar, Task or Folder,")
+            print("Want to Use group Note, Calendar, Task or Folder,")
             print("You must set -um option.")
             quit()
     
@@ -627,6 +632,7 @@ def postGroup(domainId, groupName, description, serviceNotification,
     result=requests.post(url,headers=header,json=params).json()
     if __name__ != "__main__":
         return result
+   
     pprint.pprint(result, indent=2)
 
 def deleteGroup(groupId, AccToken):
