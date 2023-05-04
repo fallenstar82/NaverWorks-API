@@ -144,7 +144,8 @@ def getUserInfo(userId, domainId, count, cursor, showDeleted, AccToken, jsonForm
 def postUserInfo(execType: str, domainId: int, extKey: str, email: str, 
                  pemail: str, firstName: str, lastName: str, cellPhone: str,
                  domainLists: list, orgUnitLists: list, isSSO: bool, 
-                 passWordPolicy: str, passWord: str, AccToken: str):    
+                 passWordPolicy: str, passWord: str, AccToken: str): 
+    
     header = {
         "Authorization": "Bearer " + AccToken,
         "Content-Type": "application/json"
@@ -211,6 +212,7 @@ def postUserInfo(execType: str, domainId: int, extKey: str, email: str,
     elif execType == "put":
         url = "https://www.worksapis.com/v1.0/users/"+email
         result = requests.put(url,headers=header,json=params).json()
+    
     if __name__ != "__main__":
         return result
     else:
@@ -296,6 +298,7 @@ def getUserCalendarLists(userId, jsonFormat, AccToken):
 
     if __name__ != "__main__":
         return result
+    
     if jsonFormat:
         pprint.pprint(result, indent=2)
     else:

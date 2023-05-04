@@ -1,0 +1,2 @@
+autouser1@goodusdata.by-works.com	priv1@priv.com	자동	사용자	010-2222-3333	82aac166-62a9-4700-2bce-03f413b30a41
+autouser2@goodusdata.by-works.com	priv2@priv.com	진짜자동	사용자라	010-4444-5555	82aac166-62a9-4700-2bce-03f413b30a41
