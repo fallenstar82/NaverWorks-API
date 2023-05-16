@@ -357,6 +357,19 @@ def deleteCalendar(calendarId, AccToken):
         return result
     print(result)
 
+def getCalendarInfo(calendarId, AccToken):
+    header = {
+        "Authorization": "Bearer " + AccToken,
+    }
+
+    url = "https://www.worksapis.com/v1.0/calendars/"+ calendarId
+
+    result = requests.get(url,headers=header).json()
+    
+    if __name__ != "__main__":
+        return result
+    pprint.pprint(result, indent=2)
+
 # Plan Management
 def getPlanCalendar(userId, calendarId, fromDateTime, untilDateTime, jsonFormat, AccToken):
     header = {
@@ -383,9 +396,6 @@ def postPlanCalendar(userId, calendarId, planSummary, planDescription, planType,
         "Content-Type" : "application/json"
     }
 
-    url = "https://www.worksapis.com/v1.0/users/" + userId + "/calendars/" + calendarId + "/events"
-    print(url)
-
     if isRepeat:
         recurrency = "RRULE:"
         positionCount = 1
@@ -410,6 +420,8 @@ def postPlanCalendar(userId, calendarId, planSummary, planDescription, planType,
             if positionCount > 1:
                 recurrency = recurrency + ";"
             recurrency = recurrency + "UNTIL=" + repeatUntil
+    else:
+        recurrency = None
 
     if planType.upper() == "DATE":
         start = { "date" : startDate}
@@ -428,7 +440,7 @@ def postPlanCalendar(userId, calendarId, planSummary, planDescription, planType,
             "reminders" : [
                 {
                     "method" : "DISPLAY",
-                    "trigger" : "PT15M"
+                    "trigger" : "-PT15M"
                 }
             ]
         }
@@ -436,6 +448,10 @@ def postPlanCalendar(userId, calendarId, planSummary, planDescription, planType,
     params = {
         "eventComponents" : eventComponents
     }
+    
+    url = "https://www.worksapis.com/v1.0/users/" + userId + "/calendars/" + calendarId + "/events"
+    print(url)
+    pprint.pprint(params)
 
     result = requests.post(url,headers=header,json=params).json()
     if __name__ != "__main__":
@@ -647,6 +663,18 @@ def deleteGroup(groupId, AccToken):
         return result.text
     print(result.text)
 
+def getGroupInfo(groupId, AccToken):
+    header = {
+        "Authorization" : "Bearer " + AccToken
+    }
+
+    url = "https://www.worksapis.com/v1.0/groups/" + groupId
+
+    result = requests.get(url, headers=header).json()
+    if __name__ != "__main__":
+        return result.text
+    pprint.pprint(result, indent=2)
+
 def usageView(mainArticle, subArticle):
     helpDict = {
         "adml" : mainArticle + " Administrator lists. Space separated.",
@@ -791,7 +819,7 @@ if __name__ == "__main__":
     group = parser.add_argument_group("Plan Options")
     group.add_argument('--fdate','--from-date-time',help="From Date Time. (YYYY-MM-DDThh:mm:ssTZD)", metavar="YYYY-MM-DDThh:mm:ssTZD", type=str)
     group.add_argument('--udate','--until-date-time',help="Until Date Time. (YYYY-MM-DDThh:mm:ssTZD)", metavar="YYYY-MM-DDThh:mm:ssTZD", type=str)
-    group.add_argument('--pt','--plan-type',help="Plan Type. [DATE/DATETIME]", choices=["DATE,","DATETIME"])
+    group.add_argument('--pt','--plan-type',help="Plan Type. [DATE/DATETIME]", choices=["DATE","DATETIME"])
     group.add_argument('--sdate','--start-date', help="Plan Start date",metavar="YYYY-MM-DD[THH:mm:ss]")
     group.add_argument('--edate','--end-date', help="Plan End date",metavar="YYYY-MM-DD[THH:mm:ss]")
     group.add_argument('--summary',help="Summary", metavar="summary", type=str)
@@ -879,13 +907,20 @@ if __name__ == "__main__":
                 usageView(mainArticle, subArticle)
             else:
                 deleteCalendar(args.cid, AccToken)
-        else:
+        elif args.m:
             mainArticle += " List User"
             subArticle = ["m"]
             if args.m == None:
                 usageView(mainArticle, subArticle)
             else:
                 getUserCalendarLists(args.m, args.j, AccToken)
+        else:
+            mainArticle += " Info"
+            subArticle = ["cid"]
+            if args.cid == None:
+                usageView(mainArticle, subArticle)
+            else:
+                getCalendarInfo(args.cid, AccToken)
     elif args.o:
         mainArticle = "Organization"
         # 필요 옵션: domainid, count default 100, cursor default null
@@ -925,6 +960,13 @@ if __name__ == "__main__":
                 usageView(mainArticle, subArticle)
             else:
                 deleteGroup(args.gid, AccToken)
+        elif args.gid:
+            mainArticle += " Info"
+            subArticle = ["gid"]
+            if args.gid == None:
+                usageView(mainArticle, subArticle)
+            else:
+                getGroupInfo(args.gid, AccToken)
         else :
             getGroupLists(args.d, args.cnt, args.cur, args.gid, args.j, AccToken)
     elif args.et:

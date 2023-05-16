@@ -49,39 +49,77 @@ domainId = 229952
 #                    pprint.pprint(result)
                         
                 
-# Group 추가 분
-# TSV File
-# 그룹명 관리자리스트(,) 사용자 사용자 사용자 ...
-with open ('groupCreate.txt','r') as t:
-        group = csv.reader(t, delimiter='\t')
-        for row in group:
-                adminList = row[1].replace(" ","").split(",")
-                memList = []
-                for memCnt in range(2, len(row)):
-                        if row[memCnt] == "":
-                                continue
-                        else:
-                                memList.append([row[memCnt].replace(" ", ""),'USER'])
-                result = worksapi.postGroup(
-                        domainId = domainId,
-                        groupName = row[0],
-                        description = None,
-                        serviceNotification = False,
-                        serviceManagement = False,
-                        externalKey = None,
-                        administrators = adminList,
-                        useMessage = True,
-                        useNote = False,
-                        useCalendar = True,
-                        useTask = False,
-                        useFolder = False,
-                        useMail = False,
-                        groupEmail = None,
-                        members = memList,
-                        AccToken = AccToken
+# # Group 추가 분
+# # TSV File
+# # 그룹명 관리자리스트(,) 사용자 사용자 사용자 ...
+# with open ('groupCreate.txt','r') as t:
+#         group = csv.reader(t, delimiter='\t')
+#         for row in group:
+#                 adminList = row[1].replace(" ","").split(",")
+#                 memList = []
+#                 for memCnt in range(2, len(row)):
+#                         if row[memCnt] == "":
+#                                 continue
+#                         else:
+#                                 memList.append([row[memCnt].replace(" ", ""),'USER'])
+#                 result = worksapi.postGroup(
+#                         domainId = domainId,
+#                         groupName = row[0],
+#                         description = None,
+#                         serviceNotification = False,
+#                         serviceManagement = False,
+#                         externalKey = None,
+#                         administrators = adminList,
+#                         useMessage = True,
+#                         useNote = False,
+#                         useCalendar = True,
+#                         useTask = False,
+#                         useFolder = False,
+#                         useMail = False,
+#                         groupEmail = None,
+#                         members = memList,
+#                         AccToken = AccToken
+#                 )
+#                 pprint.pprint(result, indent=2)
+
+# 일정 추가 부분
+## 사용자ID(메인유저) 캘린더아이디 일정명 세부 일정내용 시작일자시간 종료일자시간 반복여부 반복간격(2주에한번 등) 반복주기 반복요일 반복월 반복종료일
+## 일정을 추가 해야하는데 이게 가장 큰 걸림돌
+with open ('schedule.txt','r') as t:
+        sch = csv.reader(t, delimiter='\t')
+        for row in sch:
+                planType = 'DATETIME'
+                userId          = row[0]
+                calendarId      = row[1]
+                planName        = row[2]
+                planDescription = row[3]
+                planStartDate   = row[4]
+                planEndDate     = row[5]
+                isRepeat        = row[6]
+                # if isRepeat == True:
+                repeatInterval  = row[7]
+                repeatFrequency = row[8]
+                repeatDays      = row[9]
+                repeatMonths    = row[10]
+                repeatEndDate   = row[11]
+                result = worksapi.postPlanCalendar(
+                        userId,
+                        calendarId,
+                        planName,
+                        planDescription,
+                        planType,
+                        planStartDate,
+                        planEndDate,
+                        'Asia/Seoul',
+                        isRepeat,
+                        repeatInterval,
+                        repeatFrequency,
+                        repeatDays,
+                        repeatMonths,
+                        repeatEndDate,
+                        AccToken
                 )
                 pprint.pprint(result, indent=2)
-
 
 
 # result = worksapi.getUserCalendarLists('jeongheon.lee@goodusdata.by-works.com', False, AccToken)
