@@ -83,9 +83,10 @@ domainId = 229952
 #                 pprint.pprint(result, indent=2)
 
 # 일정 추가 부분
-## 사용자ID(메인유저) 캘린더아이디 일정명 세부 일정내용 시작일자시간 종료일자시간 반복여부 반복간격(2주에한번 등) 반복주기 반복요일 반복월 반복종료일
+## 0.사용자ID(메인유저) 캘린더아이디 일정명 세부 일정내용 시작일자시간 종료일자시간 반복여부 반복간격(2주에한번 등) 반복주기 반복요일 반복월 반복종료일
 ## 일정을 추가 해야하는데 이게 가장 큰 걸림돌
 with open ('schedule.txt','r') as t:
+        attendees = list()
         sch = csv.reader(t, delimiter='\t')
         for row in sch:
                 planType = 'DATETIME'
@@ -95,13 +96,31 @@ with open ('schedule.txt','r') as t:
                 planDescription = row[3]
                 planStartDate   = row[4]
                 planEndDate     = row[5]
-                isRepeat        = row[6]
-                # if isRepeat == True:
-                repeatInterval  = row[7]
-                repeatFrequency = row[8]
-                repeatDays      = row[9]
-                repeatMonths    = row[10]
-                repeatEndDate   = row[11]
+                attendeesRaw    = row[6].replace(' ','').split(',')
+                for attendeesNum in range(len(attendeesRaw)):
+                        attendees[attendeesNum] = [
+                                attendeesRaw[attendeesNum],
+                                'ACCEPTED'
+                        ]
+                        
+                if row[7] == 'Y':
+                        isRepeat = True
+                        repeatInterval  = row[8]
+                        repeatFrequency = row[9].replace('일','DAILY').replace('주','WEEKLY').replace('월','MONTHLY').replace('연','YEARLY')
+                        repeatDays = row[10].replace('월','MO').replace('화','TU').replace('수','WE').replace('목','TH').replace('금','FR').replace('토','SA').replace('일','SU')
+                        repeatMonths    = str(row[11])
+                        if row[12] != None:
+                                repeatEndDate   = str(row[11]) + 'T000000Z'
+                        else:
+                                repeatEndDate = None
+
+                else:
+                        isRepeat = False
+                        repeatInterval = None
+                        repeatFrequency = None
+                        repeatDays = None
+                        repeatMonths = None
+                        repeatEndDate = None
                 result = worksapi.postPlanCalendar(
                         userId,
                         calendarId,
@@ -111,6 +130,7 @@ with open ('schedule.txt','r') as t:
                         planStartDate,
                         planEndDate,
                         'Asia/Seoul',
+                        attendees,
                         isRepeat,
                         repeatInterval,
                         repeatFrequency,

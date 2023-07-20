@@ -45,7 +45,7 @@ def getToken(clientId, clientSecret, serviceAccount, privKey, scope, outputFile)
 
     url = "https://auth.worksmobile.com/oauth2/v2.0/token"
     result = requests.post(url, params=params, headers=header).json()
-
+    print(result)
     print("####################################")
     print("# Access Token Generate Info       #")
     print("####################################")
@@ -388,13 +388,15 @@ def getPlanCalendar(userId, calendarId, fromDateTime, untilDateTime, jsonFormat,
         return result
     pprint.pprint(result, indent=2)
 
-def postPlanCalendar(userId, calendarId, planSummary, planDescription, planType, startDate, endDate, timeZone,
+def postPlanCalendar(userId, calendarId, planSummary, planDescription, planType, startDate, endDate, timeZone, attendeeList,
                      isRepeat, repeatInterval, repeatFrequency, repeatDay, repeatMonth,
                      repeatUntil, AccToken):
     header = {
         "Authorization" : "Bearer " + AccToken,
         "Content-Type" : "application/json"
     }
+
+    attendees = list()
 
     if isRepeat:
         recurrency = "RRULE:"
@@ -423,6 +425,13 @@ def postPlanCalendar(userId, calendarId, planSummary, planDescription, planType,
     else:
         recurrency = None
 
+    if attendeeList:
+        for attendeeNum in range(0,len(attendeeList)):
+            attendees[attendeeNum] = {
+                "id": attendeeList[attendeeNum][0],
+                "partstat": "ACCEPTED" if len(attendeeList[attendeeNum]) < 2 else attendeeList[attendeeNum][1]
+            }
+
     if planType.upper() == "DATE":
         start = { "date" : startDate}
         end = {"date" : endDate}
@@ -442,9 +451,11 @@ def postPlanCalendar(userId, calendarId, planSummary, planDescription, planType,
                     "method" : "DISPLAY",
                     "trigger" : "-PT15M"
                 }
-            ]
+            ],
+            "attendees" : attendees
         }
     ]
+
     params = {
         "eventComponents" : eventComponents
     }
@@ -675,6 +686,45 @@ def getGroupInfo(groupId, AccToken):
         return result.text
     pprint.pprint(result, indent=2)
 
+def postShareDrive(driveMasters, driveName, driveDescription, AccToken):
+    header = {
+        "Authorization" : "Bearer " + AccToken
+    }
+
+    url = "https://www.worksapis.com/v1.0/sharedrives"
+
+    master = list()
+
+    for masterCnt in range(0, len(driveMasters)):
+        master.append({ "id" : driveMasters[masterCnt] })
+
+    params = {
+        "description" : driveDescription,
+        "masters" : master,
+        "name" : driveName
+    }
+
+    pprint.pprint(params, indent=2)
+
+    # result = requests.post(url, headers=header, params=params).json()
+    result = requests.post(url, headers=header, ).json()
+    if __name__ != "__main__":
+        return result
+    pprint.pprint(result, indent=2)
+
+def getShareDrive(AccToken):
+    header = {
+        "Authorization" : "Bearer " + AccToken
+    }
+
+    url = "https://www.worksapis.com/v1.0/sharedrives"
+
+    result = requests.get(url,headers=header).json()
+    
+    if __name__ != "__main__":
+        return result
+    pprint.pprint(result, indent=2)
+
 def usageView(mainArticle, subArticle):
     helpDict = {
         "adml" : mainArticle + " Administrator lists. Space separated.",
@@ -695,7 +745,8 @@ def usageView(mainArticle, subArticle):
         "k" : "Private Key File",
         "last-name" : "Last Name",
         "m" : mainArticle + " ID (Email or Key)",
-        "mem" : "Members. ( Usage : --mem MEMID TYPE ROLE --mem MEMID TYPE ROLE ). ROLE used in Calendar",
+        "mem" : "Attendee member. --mem id type. type could be NEEDS-ACTION, ACCEPTED, DECLINED, TENTATIVE" if mainArticle == "Plan Post" else "Members. ( Usage : --mem MEMID TYPE ROLE --mem MEMID TYPE ROLE ). ROLE used in Calendar",
+        "mst" : "Shared Drive Master's ID. One or more can be master. Space separated.",
         "n" : mainArticle + " Name",
         "password-config" : "Password Config. Do not set if you use SSO. ADMIN or MANUAL",
         "password" : "Password when usin ADMIN password-config.",
@@ -750,16 +801,19 @@ if __name__ == "__main__":
     # group.add_argument('-h',help='Help', action="store_true")
 
     # Get Info: Main
-    group = parser.add_argument_group("Getting Information")
+    # group = parser.add_argument_group("Getting Information")
+    group = parser.add_mutually_exclusive_group(required=False)
     group.add_argument('-ca', help='Calendar Management', action='store_true')
     group.add_argument('-et', help='Employees Type Management', action='store_true')
     group.add_argument('-G',  help='Group Management', action='store_true')
     group.add_argument('-o',  help='Organization Managmenet', action='store_true')
     group.add_argument('-u',  help='User Management', action='store_true')
     group.add_argument('-P',  help='Plan Management', action='store_true')
+    group.add_argument('-D',  help='Shared Drive Management', action='store_true')
    
     # Other options
-    group = parser.add_argument_group("Sub-main Arguments")
+    # group = parser.add_argument_group("Sub-main Arguments")
+    group = parser.add_mutually_exclusive_group(required=False)
     group.add_argument('--a','--adjust',help='Adjust Info', action="store_true")
     group.add_argument('--p','--post', help='Post data to Server', action='store_true')
     group.add_argument('--r','--remove',help='Remove Data', action='store_true')
@@ -823,6 +877,7 @@ if __name__ == "__main__":
     group.add_argument('--sdate','--start-date', help="Plan Start date",metavar="YYYY-MM-DD[THH:mm:ss]")
     group.add_argument('--edate','--end-date', help="Plan End date",metavar="YYYY-MM-DD[THH:mm:ss]")
     group.add_argument('--summary',help="Summary", metavar="summary", type=str)
+    group.add_argument('--att','--attendee')
     group.add_argument('--rs','--repeat-schedule', help="Is Repeat", action='store_true', default=False)
     group.add_argument('--ri', '--repeat-interval',help="Repeat Interval", metavar="Repeat Interval. Number", type=str)
     group.add_argument('--rf', '--repeat-frequency',help="Repeat Frequency", choices=["DAILY","WEEKLY","MONTHLY","YEARLY"])
@@ -830,10 +885,11 @@ if __name__ == "__main__":
     group.add_argument('--rm', '--repeat-month', help="Repeat Month. 1~12", type=str)
     group.add_argument('--tz', '--time-zone', help="Timezone", default="Asia/Seoul")
 
+    group = parser.add_argument_group("Shared Drive Option")
+    group.add_argument('--mst','--masters', help="Drive Master's ID. Space spearated", metavar="Master User ID", nargs="*")
+
+
     args=parser.parse_args()
-    print("="*30)
-    print(args)
-    print("="*30)
 
     if args.g == False:
         with open (args.t,'r') as f:
@@ -976,12 +1032,12 @@ if __name__ == "__main__":
         if args.p:
             mainArticle += " Post"
             subArticle = ["m", "cid", "summary", "des", "pt", "sdate", "edate", "rs",
-                        "ri", "rf", "rd", "rm", "udate"]
+                        "ri", "rf", "rd", "rm", "udate", "mem"]
             if args.m == None or args.cid == None or args.summary == None or args.sdate == None or args.edate == None:
                 usageView(mainArticle, subArticle)
             else:
                 postPlanCalendar(args.m, args.cid, args.summary, args.des, args.pt, args.sdate,
-                                args.edate, args.tz, args.rs, args.ri, args.rf, args.rd, args.rm,
+                                args.edate, args.tz, args.mem, args.rs, args.ri, args.rf, args.rd, args.rm,
                                 args.udate, AccToken)
         else:
             mainArticle += " Query"
@@ -990,6 +1046,19 @@ if __name__ == "__main__":
                 usageView(mainArticle, subArticle)
             else:
                 getPlanCalendar(args.m, args.cid, args.fdate, args.udate, args.j, AccToken)
+    elif args.D:
+        mainArticle = "Shared Drive"
+        if args.p:
+            mainArticle += " Post"
+            subArticle = ["mst","n","des"]
+            if args.n == None or args.mst == None:
+                usageView(mainArticle, subArticle)
+            else:
+                postShareDrive(args.mst, args.n, args.des, AccToken)
+        else:
+            mainArticle += " Get"
+            getShareDrive(AccToken)
+
 
 
 
