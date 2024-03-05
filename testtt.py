@@ -1,3 +1,3 @@
-y = [3,4,5]
-print(len(y))
-print(range(len(y)))
+y=[[3,4,5]]
+y.append([6,7,8])
+print(y)

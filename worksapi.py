@@ -129,10 +129,16 @@ def getUserInfo(userId, domainId, count, cursor, showDeleted, AccToken, jsonForm
                             None
                         else:
                             continue
-
+                    if result["users"][userCount]["userName"]["lastName"] == None and result["users"][userCount]["userName"]["firstName"] != None:
+                        memberName = result["users"][userCount]["userName"]["firstName"]
+                    elif result["users"][userCount]["userName"]["lastName"] != None and result["users"][userCount]["userName"]["firstName"] == None:
+                        memberName = result["users"][userCount]["userName"]["lastName"]
+                    else:
+                        memberName = result["users"][userCount]["userName"]["lastName"] + result["users"][userCount]["userName"]["firstName"]
                     print(charAlign(result["users"][userCount]["userId"],50) +
                           charAlign(result["users"][userCount]["email"],40) +
-                          charAlign(result["users"][userCount]["userName"]["lastName"] + result["users"][userCount]["userName"]["firstName"],25) +
+                          charAlign(memberName, 25) +
+                        #   charAlign(result["users"][userCount]["userName"]["lastName"] + result["users"][userCount]["userName"]["firstName"],25) +
                           charAlign("True" if result["users"][userCount]["isPending"] == True else "False",15) +
                           charAlign("True" if result["users"][userCount]["isSuspended"] == True else "False", 15) +
                           charAlign("True" if result["users"][userCount]["isDeleted"] == True else "False", 15)
@@ -198,7 +204,7 @@ def postUserInfo(execType: str, domainId: int, extKey: str, email: str,
                 "passwordCreationType": "ADMIN",
                 "password": passWord
             }
-        elif passWordPolicy == 'MANUAL':
+        elif passWordPolicy == 'MEMBER':
             params["passwordConfig"] = {
                 "passwordCreationType": "MEMBER",
             }
@@ -287,14 +293,20 @@ def postEmployeesType(domainId, displayOrder, employementTypeName, empTypeExtern
     print(result.text)
 
 # User Calendar
-def getUserCalendarLists(userId, jsonFormat, AccToken):
+def getUserCalendarLists(userId, jsonFormat, nextCursor, calendarId, AccToken):
     header = {
         "Authorization": "Bearer " + AccToken
     }
 
-    url = "https://www.worksapis.com/v1.0/users/" + userId + "/calendar-personals"
+    if calendarId != None:
+        url = "https://www.worksapis.com/v1.0/users/" + userId + "/calendar-personals/" + calendarId
+    else:
+        url = "https://www.worksapis.com/v1.0/users/" + userId + "/calendar-personals"
+    param=list()
+    if nextCursor != None:
+        param={ "cursor" : nextCursor }
 
-    result = requests.get(url, headers=header).json()
+    result = requests.get(url, params=param, headers=header).json()
 
     if __name__ != "__main__":
         return result
@@ -302,8 +314,16 @@ def getUserCalendarLists(userId, jsonFormat, AccToken):
     if jsonFormat:
         pprint.pprint(result, indent=2)
     else:
-        for calList in result["calendarPersonals"]:
-            print("%-50s : %-45s" % (calList["calendarId"], calList["calendarName"]))
+        if 'code' in result:
+            pprint.pprint(result, indent=2)
+        else:
+            if calendarId != None:
+                pprint.pprint(result, indent=2)
+            else:
+                for calList in result["calendarPersonals"]:
+                    print("%-50s : %-45s" % (calList["calendarId"], calList["calendarName"]))
+                if result["responseMetaData"]["nextCursor"] != None:
+                    print("Next Cursor : " + result["responseMetaData"]["nextCursor"])
 
 def postCalendar(calendarName, members, CalindarDescription, isPublic, AccToken):
     header = {
@@ -370,6 +390,49 @@ def getCalendarInfo(calendarId, AccToken):
         return result
     pprint.pprint(result, indent=2)
 
+def modifyUserCalendar(userId:str, calendarId:str, isShow:bool, members:list, isPublic:bool, calDescription:str, AccToken):
+    header = {
+        "Authorization": "Bearer " + AccToken,
+        "Content-Type" : "application/json"
+    }
+
+    if userId == None and isShow == None and members == None and isPublic == None and calDescription == None:
+        print("No Change")
+        quit()
+    
+    if userId != None:
+        url = "https://www.worksapis.com/v1.0/users/" + userId + "/calendar-personals/" + calendarId
+    else:
+        url = "https://www.worksapis.com/v1.0/calendars/" + calendarId
+    
+    param = dict()
+    if isShow != None:
+        param["isShowOnLNBList"] = isShow
+    
+    if members != None:
+        param["members"]=list()
+        for cnt in range(0,len(members)):
+            param["members"].append(
+                {
+                    "id" : members[cnt][0],
+                    "type" : members[cnt][1],
+                    "role" : members[cnt][2]
+                }
+            )
+    if isPublic != None:
+        param["isPublic"] = isPublic
+    
+    if calDescription != None:
+        param["descripton"] = calDescription
+  
+    
+    result=requests.patch(url, json=param, headers=header).json()
+    
+    if __name__ != '__main__':
+        return result
+    else:
+        pprint.pprint(result, indent=2)
+
 # Plan Management
 def getPlanCalendar(userId, calendarId, fromDateTime, untilDateTime, jsonFormat, AccToken):
     header = {
@@ -388,49 +451,60 @@ def getPlanCalendar(userId, calendarId, fromDateTime, untilDateTime, jsonFormat,
         return result
     pprint.pprint(result, indent=2)
 
-def postPlanCalendar(userId, calendarId, planSummary, planDescription, planType, startDate, endDate, timeZone, attendeeList,
-                     isRepeat, repeatInterval, repeatFrequency, repeatDay, repeatMonth,
-                     repeatUntil, AccToken):
+def postPlanCalendar(userId:str, calendarId:str, planSummary:str, planDescription:str, eventLocation:str, planType:str, 
+                     startDate:str, endDate:str, timeZone:str, attendeeList:list,
+                     isRepeat:bool, repeatInterval:int, repeatFrequency:str, repeatDay:str, repeatMonth:str,
+                     repeatUntil:str, repeatException:str, AccToken):
     header = {
         "Authorization" : "Bearer " + AccToken,
         "Content-Type" : "application/json"
     }
 
     attendees = list()
-
+    recurrency=list()
     if isRepeat:
-        recurrency = "RRULE:"
+        repeatRule = "RRULE:"
         positionCount = 1
         if repeatInterval:
-            recurrency = recurrency + "INTERVAL="+str(repeatInterval)
+            repeatRule = repeatRule + "INTERVAL="+str(repeatInterval)
             positionCount = positionCount + 1
         if repeatFrequency:
             if positionCount > 1:
-                recurrency = recurrency + ";"
-            recurrency = recurrency + "FREQ=" + repeatFrequency.upper()
+                repeatRule = repeatRule + ";"
+            repeatRule = repeatRule + "FREQ=" + repeatFrequency.upper()
             positionCount = positionCount + 1
         if repeatDay:
             if positionCount > 1:
-                recurrency = recurrency + ";"
-            recurrency = recurrency + "BYDAY="+repeatDay.upper()
+                repeatRule = repeatRule + ";"
+            repeatRule = repeatRule + "BYDAY="+repeatDay.upper()
             positionCount = positionCount + 1
         if repeatMonth:
             if positionCount > 1:
-                recurrency = recurrency + ";"
-            recurrency = recurrency + "BYMONTH=" + repeatMonth
+                repeatRule = repeatRule + ";"
+            repeatRule = repeatRule + "BYMONTH=" + repeatMonth
         if repeatUntil:
             if positionCount > 1:
-                recurrency = recurrency + ";"
-            recurrency = recurrency + "UNTIL=" + repeatUntil
-    else:
-        recurrency = None
+                repeatRule = repeatRule + ";"
+            recurrency.append(repeatRule + "UNTIL=" + repeatUntil)
+        if repeatException != None and len(repeatException) > 0:
+            if planType == "DATETIME":
+                exceptionRule = "EXDATE;TZID=" + timeZone + ":"
+            else:
+                exceptionRule = "EXDATE;VALUE=DATE:"
+            for x in range(0,len(repeatException)):
+                exceptionRule = exceptionRule + repeatException[x]
+                if x < len(repeatException) - 1:
+                    exceptionRule = exceptionRule + ","
+            recurrency.append(exceptionRule)
 
+    attendees = list()
     if attendeeList:
         for attendeeNum in range(0,len(attendeeList)):
-            attendees[attendeeNum] = {
-                "id": attendeeList[attendeeNum][0],
-                "partstat": "ACCEPTED" if len(attendeeList[attendeeNum]) < 2 else attendeeList[attendeeNum][1]
+            attendees.append({
+                "email": attendeeList[attendeeNum][0],
+                "partstat": attendeeList[attendeeNum][1]
             }
+            )
 
     if planType.upper() == "DATE":
         start = { "date" : startDate}
@@ -445,24 +519,27 @@ def postPlanCalendar(userId, calendarId, planSummary, planDescription, planType,
             "description" : planDescription,
             "start" : start,
             "end" : end,
-            "recurrence" : [ recurrency ],
+            "recurrence" : recurrency,
             "reminders" : [
                 {
                     "method" : "DISPLAY",
-                    "trigger" : "-PT15M"
+                    "trigger" : "-P1D"
                 }
             ],
             "attendees" : attendees
         }
     ]
 
+    if eventLocation != None:
+        eventComponents[0]["location"] = eventLocation
+
     params = {
         "eventComponents" : eventComponents
     }
     
     url = "https://www.worksapis.com/v1.0/users/" + userId + "/calendars/" + calendarId + "/events"
-    print(url)
-    pprint.pprint(params)
+    # print(url)
+    # pprint.pprint(params)
 
     result = requests.post(url,headers=header,json=params).json()
     if __name__ != "__main__":
@@ -470,6 +547,36 @@ def postPlanCalendar(userId, calendarId, planSummary, planDescription, planType,
     pprint.pprint(result, indent=2)
 
 # Organization
+def getOrganizationInfo(domainId, orgId, jsonFormat, AccToken):
+    header = {
+        "Authorization": "Bearer " + AccToken
+    }
+
+    url = "https://www.worksapis.com/v1.0/orgunits/" + orgId
+
+    result = requests.get(url,headers=header).json()
+
+    if jsonFormat:
+        if 'code' in result:
+            print("CODE : " + result['code'])
+            print("DESC : " + result['description'])
+        else:
+            pprint.pprint(result, indent=2)
+    else:
+        print(charAlign("Organization ID", 40) +
+                  charAlign("Organization Email", 50) +
+                  charAlign("Organization Name", 30) +
+                  charAlign("Parents Organization Id", 40)
+                  )
+        print("-"*160)
+        print(
+            charAlign(result["orgUnitId"], 40) +
+            charAlign(result["email"], 50) +
+            charAlign(result["orgUnitName"], 30) +
+            charAlign(result["parentOrgUnitId"], 40)
+        )
+        
+
 def getOraganizationLists(domainId, count, cursor, jsonFormat, AccToken):
     header = {
         "Authorization": "Bearer " + AccToken
@@ -549,7 +656,7 @@ def deleteOrgnization(orgUnitId, AccToken):
     print(result.text)
     
 # Group Management
-def getGroupLists(domainId, count, cursor, groupId, jsonFormat, AccToken):
+def getGroupLists(domainId :int, count :int, cursor :str, groupId :int, jsonFormat :bool, AccToken):
     header = {
         "Authorization": "Bearer " + AccToken
     }
@@ -568,7 +675,6 @@ def getGroupLists(domainId, count, cursor, groupId, jsonFormat, AccToken):
         url = "https://www.worksapis.com/v1.0/groups"
 
     result = requests.get(url, headers=header, params=params).json()
-
     
     if __name__ != "__main__":
         return result
@@ -607,21 +713,46 @@ def getGroupLists(domainId, count, cursor, groupId, jsonFormat, AccToken):
         print("CODE : " + result["code"])
         print("DESC : " + result["description"])
 
-def postGroup(domainId :int, groupName :str, description :str, serviceNotification :bool,
+def postGroup(operationType :str, groupId :str, domainId :int, groupName :str, description :str, serviceNotification :bool,
               serviceManagement :bool, externalKey :str, administrators :list,
               useMessage :bool, useNote :bool, useCalendar :bool, useTask :bool, useFolder :bool,
-              useMail :bool, groupEmail :str, members :list, AccToken :str ):
+              useMail :bool, groupEmail :str, members :list, jsonFormat :bool, AccToken :str ):
+    
+    # um 이 False 인데도 아래 Feature 를 사용하려고 하면 에러를 출력하고 종료한다.
+    #  useNote, useCalendar, useTask, useFolder
     if useMessage == False:
-        if useNote == True or useCalendar == True or useTask == True or useFolder == True:
-            print("Want to Use group Note, Calendar, Task or Folder,")
-            print("You must set -um option.")
+        errCode = 0
+        errFeature = ''
+        if useNote == True:
+            errFeature = 'useNote(--un)'
+            errFeature = errFeature + 1
+        if useCalendar == True:
+            if errCode > 0:
+                errFeature = errFeature + ', '
+            errFeature = errFeature + 'useCalendar(--uc)'
+            errFeature = errFeature + 1
+        if useTask == True:
+            if errCode > 0:
+                errFeature = errFeature + ', '
+            errFeature = errFeature + 'useTask(--uc)'
+            errFeature = errFeature + 1            
+        if useFolder == True:
+            if errCode > 0:
+                errFeature = errFeature + ', '
+            errFeature = errFeature + 'useFolder(--uf)'
+            errFeature = errFeature + 1       
+        
+        if errCode > 0:
+            print('useMessage(--um) is Disabled. But ' + errFeature + ' feature(s) enabled.')
+            print('Use --um if you want to use following features.')
+            print(errFeature)
             quit()
     
     header = {
         "Authorization": "Bearer " + AccToken,
         "Content-Type" : "application/json"
     }
-
+    
     params = {
         "domainId" : domainId,
         "groupName" : groupName,
@@ -654,13 +785,133 @@ def postGroup(domainId :int, groupName :str, description :str, serviceNotificati
                 "type" :members[memberSeq][1]
             }
         )
-    url = "https://www.worksapis.com/v1.0/groups"
 
-    result=requests.post(url,headers=header,json=params).json()
+    result=''
+
+    if operationType == 'Post':
+        url = "https://www.worksapis.com/v1.0/groups"
+        result=requests.post(url,headers=header,json=params).json()
+    elif operationType == 'Adjust':
+        url = "https://www.worksapis.com/v1.0/groups/" + groupId
+        result=requests.put(url, headers=header, json=params).json()
+    else:
+        print("Unknown opartion type")
+        quit()
+    
     if __name__ != "__main__":
         return result
-   
-    pprint.pprint(result, indent=2)
+    
+    if jsonFormat:
+        pprint.pprint(result, indent=2)
+    else:
+        if 'code' in result:
+            pprint.pprint(result, indent=2)
+        else:
+            print("Group : " + result["groupName"] + " ("+ result["groupId"] + ")")
+            print('-'*150)
+            print("No descriptions of this group" if result["description"] == None else result["description"])
+            print('-'*150)
+            print('__Administrators__')
+            for cnt in range(0, len(result["administrators"])):
+                print("  " + result["administrators"][cnt]["userId"])
+            print("__Members__")
+            for cnt in range(0, len(result["members"]), 3):
+                for hcnt in range(cnt, cnt+3 if cnt+3 < len(result["members"]) else len(result["members"])):
+                    print(end="  ")
+                    print(charAlign(result["members"][hcnt]["id"] + "(" + result["members"][hcnt]["type"] + ")",50), end="")
+                print()
+
+def modifyGroup(domainId :int, groupId :str,  groupName :str, description :str, serviceNotification :bool,
+              serviceManagement :bool, administrators :list,
+              useMessage :bool, useNote :bool, useCalendar :bool, useTask :bool, useFolder :bool,
+              useMail :bool, groupEmail :str, members :list, jsonFormat :bool, AccToken :str ):
+    
+    header = {
+        "Authorization": "Bearer " + AccToken,
+        "Content-Type" : "application/json"
+    }
+
+    url = "https://www.worksapis.com/v1.0/groups/" + groupId
+
+    param = dict()
+
+    param["domainId"] = domainId
+
+    if groupName != None:
+        param["groupname"] = groupName
+    
+    if description != None:
+        param["description"] = description
+    
+    if serviceNotification != None:
+        param["useServiceNotification"] = serviceNotification
+    
+    if administrators != None:
+        param["administrators"] = list()
+        for adminSeq in range(0,len(administrators)):
+            param["administrators"].append(
+            {
+                "userId" : administrators[adminSeq]
+            }
+        )
+            
+    if members != None:
+        param["members"] = list()
+        for memberSeq in range(0,len(members)):
+            param["members"].append(
+                {
+                    "id" : members[memberSeq][0],
+                    "type" :members[memberSeq][1]
+                }
+            )
+
+    if groupEmail != None:
+        param["groupEmail"] = groupEmail
+
+    if useMail != None:
+        param["useMail"] = useMail
+
+    if serviceManagement != None:
+        param["serviceManagement"] = serviceManagement
+
+    if useMessage != None:
+        param["useMessage"] = useMessage
+
+    if useNote != None:
+        param["useNote"] = useNote
+
+    if useCalendar != None:
+        param["useCalendar"] = useCalendar
+
+    if useTask != None:
+        param["useTask"] = useTask
+    
+    if useFolder != None:
+        param["useFolder"] = useFolder
+
+    # pprint.pprint(param, indent=2)
+
+    result = requests.patch(url,headers=header, json=param).json()
+
+    if __name__ != "__main__":
+        return result
+    
+    if jsonFormat or 'code' in result:
+        pprint.pprint(result, indent=2)
+    else:
+        print("Group : " + result["groupName"] + " ("+ result["groupId"] + ")")
+        print('-'*150)
+        print("No descriptions of this group" if result["description"] == None else result["description"])
+        print('-'*150)
+        print('__Administrators__')
+        for cnt in range(0, len(result["administrators"])):
+            print("  " + result["administrators"][cnt]["userId"])
+        print("__Members__")
+        for cnt in range(0, len(result["members"]), 3):
+            for hcnt in range(cnt, cnt+3 if cnt+3 < len(result["members"]) else len(result["members"])):
+                print(end="  ")
+                print(charAlign(result["members"][hcnt]["id"] + "(" + result["members"][hcnt]["type"] + ")",50), end="")
+            print()
 
 def deleteGroup(groupId, AccToken):
     header = {
@@ -674,17 +925,52 @@ def deleteGroup(groupId, AccToken):
         return result.text
     print(result.text)
 
-def getGroupInfo(groupId, AccToken):
+def getGroupInfo(groupId, jsonFormat, AccToken):
     header = {
-        "Authorization" : "Bearer " + AccToken
+        "Authorization": "Bearer " + AccToken
     }
 
     url = "https://www.worksapis.com/v1.0/groups/" + groupId
 
     result = requests.get(url, headers=header).json()
+
     if __name__ != "__main__":
-        return result.text
-    pprint.pprint(result, indent=2)
+        return result
+
+    if jsonFormat:
+        pprint.pprint(result, indent=2)
+    else:
+        if 'code' in result:
+            pprint.pprint(result, indent=2)
+        else:
+            print("Group : " + result["groupName"] + " ("+ result["groupId"] + ")")
+            print('-'*150)
+            print("No descriptions of this group" if result["description"] == None else result["description"])
+            print('-'*150)
+            print('__Administrators__')
+            for cnt in range(0, len(result["administrators"])):
+                print("  " + result["administrators"][cnt]["userId"])
+            print()
+            print("__Members__")
+            for cnt in range(0, len(result["members"]), 3):
+                for hcnt in range(cnt, cnt+3 if cnt+3 < len(result["members"]) else len(result["members"])):
+                    print(end="  ")
+                    print(charAlign(result["members"][hcnt]["id"] + "(" + result["members"][hcnt]["type"] + ")",50), end="")
+                print()
+            print()
+            if result["useMessage"]:
+                print("__Group Message(--um) Enabled__")
+                print("   " + charAlign("Group Note     (--un) : ", 24), end="")
+                print(charAlign("ENABLED" if result["useNote"] else "DISABLED", 10), end="")
+                print("   " + charAlign("Group Foler    (--uf) : ", 24), end="")
+                print("ENABLED" if result["useFolder"] else "DISABLED")
+                print("   " + charAlign("Group Calendar (--uc) : ", 24), end="")
+                print(charAlign("ENABLED" if result["useCalendar"] else "DISABLED", 10), end="")
+                print("   " + charAlign("Group Task     (--ut) : ", 24), end="")
+                print("ENABLED" if result["useFolder"] else "DISABLED")
+            else:
+                print("__Group message(--um) Disabled__")
+                # useNote, useCalendar, useTask, useFolder, 
 
 def postShareDrive(driveMasters, driveName, driveDescription, AccToken):
     header = {
@@ -725,6 +1011,204 @@ def getShareDrive(AccToken):
         return result
     pprint.pprint(result, indent=2)
 
+def getShareDriveList(AccToken):
+    header = {
+        "Authorization" : "Bearer " + AccToken
+    }
+
+    url = "https://www.worksapis.com/v1.0/sharedrives"
+
+    result = requests.get(url, headers=header).json()
+
+    pprint.pprint(result, indent=2)
+
+def manageShareDriveObject(driveId :str, operationType :str, fileId :str, objectName :str, fileProperties :bool, cursor :str, jsonFormat :bool, AccToken):
+    # Query / Modify 에 따른 Header 종류 추가
+    # Create 는 Folder 에 한함.
+    # fileId 은 fileId 와 매핑됨.
+    
+    header = {
+        "Authorization" : "Bearer " + AccToken,
+    }
+
+    result=''
+    url = "https://www.worksapis.com/v1.0/sharedrives/" + driveId + "/files"
+
+    ## 목록 조회
+    if operationType.upper() == "QUERY":
+        params = {
+            "orderby" : "createdTime%20desc",
+            "count" : 200
+        }
+
+        if cursor != None:
+            params["cursor"] = cursor
+
+        # 루트폴더 조회
+        if fileId == None:
+            result = requests.get(url, headers=header, params=params).json()
+        else:
+            # 특정 파일에 대한 속성 조회
+            if fileProperties:
+                url = url + "/" + fileId
+                result = requests.get(url, headers=header).json()
+            # 특정 폴더에 대한 목록조회
+            else:
+                url = url + "/" + fileId + "/children"
+                result = requests.get(url, headers=header, params=params).json()
+    ## Folder 생성
+    elif operationType.upper() == "CREATE":
+        header["Content-Type"] =  "application/json"
+
+        params = {
+            "fileName" : objectName
+        }
+
+        # 루트 폴더에 생성
+        if fileId == None:
+            url = url + "/createfolder"
+            result = requests.post(url, headers=header,  json=params).json()
+        # 특정 폴더에 생성
+        else:
+            url = url + "/" + fileId + "/createfolder"
+            result = requests.post(url, headers=header, json=params).json()
+    ## File / Folder 삭제
+    elif operationType.upper() == "REMOVE":
+        url = url + "/" + fileId
+        result = requests.delete(url, headers=header)
+        pprint.pprint(result, indent=2)
+
+
+    if __name__ != "__main__":
+        return result
+    
+    if jsonFormat or 'code' in result:
+        pprint.pprint(result, indent=2)
+    elif operationType.upper() == "QUERY": # 목록 조회
+        if fileProperties == None or fileProperties == False:
+            print(charAlign("File Path & Name", 60), end="  ")
+            print(charAlign("File Type", 10), end=" ")
+            print(charAlign("File Size", 20), end=" ")
+            print(charAlign("File ID", 55))
+            print("-"*150)
+            for cnt in range(0, len(result["files"])):
+                print(charAlign(result["files"][cnt]["filePath"], 60), end="  ")
+                print(charAlign(result["files"][cnt]["fileType"], 10), end=" ")
+                print(charAlign(str(result["files"][cnt]["fileSize"]), 20), end=" ")
+                print(charAlign(result["files"][cnt]["fileId"], 55))
+            if result["responseMetaData"]["nextCursor"] != None:
+                print("Next Cursor : " + result["responseMetaData"]["nextCursor"])
+        else: # 파일 속성 조회
+            print(charAlign("File Path & Name", 80), end="  ")
+            print(charAlign("File Type", 10), end=" ")
+            print(charAlign("Parent Id", 55))
+            print("-"*175)
+            print(charAlign(result["filePath"] + ("" if result["fileType"] == 'FOLDER' else result["fileName"]), 80), end="  ")
+            print(charAlign(result["fileType"], 10), end=" ")
+            print(charAlign(result["parentFileId"], 55))
+    elif operationType.upper() == "CREATE":
+        pprint.pprint(result, indent=2)
+                
+
+def manageShareDrivePrivs(driveId :str, operationType :str, fileId :str, permId :str, jsonFormat :bool, userId :str, privType :str, AccToken):
+    # 권한이 하나의 객체로서 취급.
+    # 권한 목록 조회, 특정 권한 목록 세부 조회, 권한 생성, 수정, 해제, 전부 해제, 허용, 미허용,  
+    # 권한 목록 조회
+    header = {
+        "Authorization" : "Bearer " + AccToken,
+    }
+
+    url = "https://www.worksapis.com/v1.0/sharedrives/" + driveId + "/files/" + fileId + "/permissions"
+
+    if operationType.upper() == "QUERY":
+        if permId != None:
+            url = url + "/" + permId
+        result = requests.get(url, headers=header).json()
+    elif operationType.upper() == "CREATE":
+        header["Content-Type"] = "application/json"
+        
+        param = {
+            "userId" : userId,
+            "type" : privType.upper()
+        }
+
+        result = requests.post(url, headers=header, json=param).json()
+    elif operationType.upper() == "MODIFY":
+        header["Content-Type"] = "application/json"
+        url = url + "/" + permId
+        param = {
+            "type" : privType.upper()
+        }
+
+        result = requests.patch(url, headers=header, json=param).json()
+    elif operationType.upper() in ["DELETE", "DELETEALL"]:
+        header["Content-Type"] = "application/json"
+        if operationType.upper() == "DELETE":
+            url = url + "/" + permId
+
+        result = requests.delete(url,headers=header)
+    elif operationType.upper() in ["ENABLE", "DISABLE"]:
+        url = url + "/" + operationType
+        result = requests.post(url, headers=header).json()
+    else:
+        print("Unknown Command.")
+        quit()
+
+    # 결과 출력
+    # 콘솔에서 직접 수행한 것이 아니면 해당 프로그램으로 리턴
+    if __name__ != "__main__":
+        return result
+    
+    if jsonFormat or 'code' in result:
+        pprint.pprint(result, indent=2)
+    elif operationType.upper() in ["ENABLE","DISABLE"]:
+        print(charAlign("File Path & Name", 60), end="  ")
+        print(charAlign("File Type", 10), end=" ")
+        print(charAlign("File Size", 20), end=" ")
+        print(charAlign("File ID", 55))
+        print("-"*150)
+        print(charAlign(result["filePath"], 60), end="  ")
+        print(charAlign(result["fileType"], 10), end=" ")
+        print(charAlign(str(result["fileSize"]), 20), end=" ")
+        print(charAlign(result["fileId"], 55))
+    else:
+        if operationType.upper() in ["DELETE","DELETEALL"]:
+            print(result)
+        else:
+            print(charAlign("Permission",70), end="   ")
+            print(charAlign("User Name", 20), end="   ")
+            print(charAlign("Priv Type", 15), end="   ")
+            print(charAlign("User Id", 35), end="   ")
+            print(charAlign("User Type", 10))
+            print("-"*190)
+            if operationType.upper() in ["QUERY", "MODIFY", "CREATE"]:                           # 권한 조회/변경 결과
+                if permId != None:
+                    print(charAlign(result["permissionId"],70), end="   ")
+                    print(charAlign(result["userName"], 20), end="   ")
+                    print(charAlign(result["type"], 15), end="   ")
+                    print(charAlign(result["userId"], 35), end="   ")
+                    print(charAlign(result["userType"], 10))
+                else:
+                    for cnt in range(0, len(result["permissions"])):
+                        print(charAlign(result["permissions"][cnt]["permissionId"],70), end="   ")
+                        print(charAlign(result["permissions"][cnt]["userName"], 20), end="   ")
+                        print(charAlign(result["permissions"][cnt]["type"], 15), end="   ")
+                        print(charAlign(result["permissions"][cnt]["userId"], 35), end="   ")
+                        print(charAlign(result["permissions"][cnt]["userType"], 10))
+            # elif operationType.upper() == "CREATE":                          # 권한 생성 결과
+            #     for cnt in range(0, len(result["permissions"])):
+            #             print(charAlign(result["permissions"][cnt]["permissionId"],70), end="   ")
+            #             print(charAlign(result["permissions"][cnt]["userName"], 20), end="   ")
+            #             print(charAlign(result["permissions"][cnt]["type"], 15), end="   ")
+            #             print(charAlign(result["permissions"][cnt]["userId"], 35), end="   ")
+            #             print(charAlign(result["permissions"][cnt]["userType"], 10))
+    
+
+
+    
+    
+
+
 def usageView(mainArticle, subArticle):
     helpDict = {
         "adml" : mainArticle + " Administrator lists. Space separated.",
@@ -736,22 +1220,32 @@ def usageView(mainArticle, subArticle):
         "dlv" : "Display Level",
         "domain-list" : "Domain lists",
         "des" : "Descriptions. Use double quota",
+        "driveid" : "Share drive ID. Required",
         "e" : "Service Id. xxxxserviceaccount@xxxxxx.com",
         "edate" : "End date. YYYY-MM-DD[THH:mm:ss]",
         "ek" : mainArticle + " External Key",
-        "first-name" : "First Name",
         "fdate" : "From Date time. YYYY-MM-DDThh:mm:ssTZD Type. Ex) 2023-05-02T15:26:00+09:00",
+        "fileid" : "File(Folder)'s Unique ID",
+        "first-name" : "First Name",
+        "fp" : "File(Folder) Properties.",
         "gid" : "Group Id",
         "k" : "Private Key File",
         "last-name" : "Last Name",
+        "loc" : "Event Location. Could be any string. ex)My Home",
         "m" : mainArticle + " ID (Email or Key)",
         "mem" : "Attendee member. --mem id type. type could be NEEDS-ACTION, ACCEPTED, DECLINED, TENTATIVE" if mainArticle == "Plan Post" else "Members. ( Usage : --mem MEMID TYPE ROLE --mem MEMID TYPE ROLE ). ROLE used in Calendar",
         "mst" : "Shared Drive Master's ID. One or more can be master. Space separated.",
         "n" : mainArticle + " Name",
+        "operation" : "File / Folder manage command. Could be one of [query] [create] [remove]. Required.",
+        "fileid" : "Specific file id. Ommit then Querying root folder",
+        "filenm" : "When you create file or folder, It's name",
         "password-config" : "Password Config. Do not set if you use SSO. ADMIN or MANUAL",
         "password" : "Password when usin ADMIN password-config.",
+        "permid" : "Permission ID. When privoper is deleteall you don't need permid. If you want query specific permission, use this option",
         "pid" : "Parents Organization Unit Id",
         "private-email" : "Private Email",
+        "privoper" : "Privilege Operation. Could be one of 'query/create/modify/delete/deleteall/enable/disable'",
+        "privtype" : "Privilege Type. Could be one of 'read/write'",
         "pt"  : "Plan Type. DATE - All day schedule, DATE / DATETIME - Time Schedule",
         "pt" : "Plan Type. DAY|DATETIME. DAY is all day schedule. Daytime has a time",
         "pub" : "If you Set, " + mainArticle + " will be public.",
@@ -782,6 +1276,7 @@ def usageView(mainArticle, subArticle):
     for params in subArticle:
         if params in helpDict.keys():
             print("%-15s : %-150s" % (params, helpDict[params]))
+    quit()
 
 
 if __name__ == "__main__":
@@ -809,7 +1304,8 @@ if __name__ == "__main__":
     group.add_argument('-o',  help='Organization Managmenet', action='store_true')
     group.add_argument('-u',  help='User Management', action='store_true')
     group.add_argument('-P',  help='Plan Management', action='store_true')
-    group.add_argument('-D',  help='Shared Drive Management', action='store_true')
+    group.add_argument('-D',  help='Share Drive Management', action='store_true')
+    group.add_argument('-Dp', help='Share Drive File/Folder Permission Management', action='store_true')
    
     # Other options
     # group = parser.add_argument_group("Sub-main Arguments")
@@ -817,6 +1313,7 @@ if __name__ == "__main__":
     group.add_argument('--a','--adjust',help='Adjust Info', action="store_true")
     group.add_argument('--p','--post', help='Post data to Server', action='store_true')
     group.add_argument('--r','--remove',help='Remove Data', action='store_true')
+    group.add_argument('--M','--modify', help='Modify(Patch) Data', action='store_true')
     
     group = parser.add_argument_group("Common Options")
     group.add_argument('--d','--domain-id', help='Domain Id', metavar="Domain_Id", type=int)
@@ -838,7 +1335,7 @@ if __name__ == "__main__":
     group.add_argument('--employee-type-id', help="User Employee Type Id", metavar="Employee Type Id")
     group.add_argument('--cellphone', help="User Cell Phone", metavar="xxx-xxx-xxxx")
     group.add_argument('--sso', help="Set parameter if using SSO", action='store_true', default=False)
-    group.add_argument('--password-config', help='Password Configuration Type. Do not set if you using SSO.', choices=['ADMIN', 'MANUAL'])
+    group.add_argument('--password-config', help='Password Configuration Type. Do not set if you using SSO.', choices=['ADMIN', 'MEMBER'])
     group.add_argument('--password', help="User Password when password policy is ADMIN", metavar="password")
 
     group = parser.add_argument_group("Organization, Oraganization Unit Options")
@@ -856,19 +1353,22 @@ if __name__ == "__main__":
     group.add_argument('--sm', '--service_manage', help="Use Service Management.", action='store_true', default=False)
     group.add_argument('--uM', '--use-mail', help="Use Group Mail. --m need.", action="store_true", default=False)
 
+    group = parser.add_argument_group("Calendar Options")
+    group.add_argument('--cid','--calendar-id', help='calendar ID', metavar="calendar_Id", type=str)
+    group.add_argument('--show', help='Show calendar in calendar lists. Default is false. Set parameter to True', action="store_true")
+
     group = parser.add_argument_group("Organization / Group Common Options")
     group.add_argument('--adml', '--admin-list', help="administrators lists", metavar="User Id or Email", nargs="*")
-    group.add_argument('--cid','--calendar-id', help='calendar ID', metavar="calendar_Id", type=str)
     group.add_argument('--des', '--description', help="Organization Unit / Group Description. Wrap using double-quota(\")", type=str)
     group.add_argument('--gid','--group-id', help='Group Id', metavar="Group_Id", type=str)
-    group.add_argument('--mem', '--member', help="Members Lists. member_id member_type. Type can be only one of USER, ORGUNIT, GROUP. You can append this parameter to add more than one member.",metavar="MemberId MemberType", nargs="*", action="append")
-    group.add_argument('--pub','--publc', help ="Set Organization unit/Group to public.", action='store_true',default=False)
-    group.add_argument('--sn', '--service-noti', help="Use Service Notifiaction.", action='store_true', default=False)
-    group.add_argument('--um', '--use-message', help="Use Organization Unit/Group Message.", action="store_true", default=False)
-    group.add_argument('--un', '--use-note', help="Use Organization Unit/Group Notes. In group, --um need.", action="store_true", default=False)
-    group.add_argument('--uc', '--use-calendar', help="Use Organization Unit/Group Calendar. In group, --um need.", action="store_true", default=False)
-    group.add_argument('--ut', '--use-task', help="Use Organization Unit/Group Task. In group, --um need.", action="store_true", default=False)
-    group.add_argument('--uf', '--use-folder', help="Use Organization Unit/Group Folder. In group, --um need.", action="store_true", default=False)
+    group.add_argument('--mem', '--member', help="Members Lists. member_id member_type. Type can be only one of USER, ORGUNIT, GROUP. On Calendar Plan allows NEEDS-ACTION, ACCEPTED, DECLINED TENTATIVE.  You can append this parameter to add more than one member.",metavar="MemberId MemberType", nargs="*", action="append")
+    group.add_argument('--pub','--publc', help ="Set Organization unit/Group to public.", action='store_true')
+    group.add_argument('--sn', '--service-noti', help="Use Service Notifiaction.", action='store_true')
+    group.add_argument('--um', '--use-message', help="Use Organization Unit/Group Message.", action="store_true")
+    group.add_argument('--un', '--use-note', help="Use Organization Unit/Group Notes. In group, --um need.", action="store_true")
+    group.add_argument('--uc', '--use-calendar', help="Use Organization Unit/Group Calendar. In group, --um need.", action="store_true")
+    group.add_argument('--ut', '--use-task', help="Use Organization Unit/Group Task. In group, --um need.", action="store_true")
+    group.add_argument('--uf', '--use-folder', help="Use Organization Unit/Group Folder. In group, --um need.", action="store_true")
     
     group = parser.add_argument_group("Plan Options")
     group.add_argument('--fdate','--from-date-time',help="From Date Time. (YYYY-MM-DDThh:mm:ssTZD)", metavar="YYYY-MM-DDThh:mm:ssTZD", type=str)
@@ -877,19 +1377,30 @@ if __name__ == "__main__":
     group.add_argument('--sdate','--start-date', help="Plan Start date",metavar="YYYY-MM-DD[THH:mm:ss]")
     group.add_argument('--edate','--end-date', help="Plan End date",metavar="YYYY-MM-DD[THH:mm:ss]")
     group.add_argument('--summary',help="Summary", metavar="summary", type=str)
-    group.add_argument('--att','--attendee')
+    group.add_argument('--loc',help="Location")
     group.add_argument('--rs','--repeat-schedule', help="Is Repeat", action='store_true', default=False)
     group.add_argument('--ri', '--repeat-interval',help="Repeat Interval", metavar="Repeat Interval. Number", type=str)
     group.add_argument('--rf', '--repeat-frequency',help="Repeat Frequency", choices=["DAILY","WEEKLY","MONTHLY","YEARLY"])
     group.add_argument('--rd', '--repeat-day', help="Repeat Day. SU,MO,TU,WE,TH,FR,SA")
     group.add_argument('--rm', '--repeat-month', help="Repeat Month. 1~12", type=str)
+    group.add_argument('--re', '--repeat-exception', help="Repeat Exception Date.", nargs="*", metavar='YYYYMMDD')
     group.add_argument('--tz', '--time-zone', help="Timezone", default="Asia/Seoul")
 
     group = parser.add_argument_group("Shared Drive Option")
-    group.add_argument('--mst','--masters', help="Drive Master's ID. Space spearated", metavar="Master User ID", nargs="*")
+    group.add_argument('--driveid', help="Share drive Id", metavar="driveId")
+    group.add_argument('--operation', help="Operation Type. One of 'query / create (folder) / remove", choices=['query','create', 'remove'])
+    group.add_argument('--fileid', help="File or Folder's Id" )
+    group.add_argument('--filenm', help="File or Folder's Name")
+    group.add_argument('--fp', help="File properties", action='store_true')
+    
+    group = parser.add_argument_group("Drive Privilege Operation Option")
+    group.add_argument('--privoper', help="Privilege Operation type. One of 'query / create / modify / delete / deleteall / enable / disable'.", choices=['query', 'create', 'modify', 'delete', 'deleteall', 'enable', 'disable'])
+    group.add_argument('--privtype', help="Privilege Type. One of 'read / write'", choices=['read','write'])
+    group.add_argument('--permid', help="Permission ID")
 
 
     args=parser.parse_args()
+    # print(args)
 
     if args.g == False:
         with open (args.t,'r') as f:
@@ -963,13 +1474,20 @@ if __name__ == "__main__":
                 usageView(mainArticle, subArticle)
             else:
                 deleteCalendar(args.cid, AccToken)
-        elif args.m:
-            mainArticle += " List User"
+        elif args.m and args.a == False:
+            mainArticle += " List for specific User"
             subArticle = ["m"]
             if args.m == None:
                 usageView(mainArticle, subArticle)
             else:
-                getUserCalendarLists(args.m, args.j, AccToken)
+                getUserCalendarLists(args.m, args.j, args.cur, args.cid, AccToken)
+        elif args.a:
+            mainArticle += " Adjust"
+            subArticle = ["cid", "m", "mem", "show", "pub", "des"]
+            if args.cid == None:
+                usageView(mainArticle, subArticle)
+            else:
+                modifyUserCalendar(args.m, args.cid, args.show, args.mem, args.pub, args.des, AccToken)
         else:
             mainArticle += " Info"
             subArticle = ["cid"]
@@ -995,7 +1513,10 @@ if __name__ == "__main__":
             else:
                 deleteOrgnization(args.uid, AccToken)
         else:
-            getOraganizationLists(args.d, args.cnt, args.cur, args.j, AccToken)
+            if args.uid != None:
+                getOrganizationInfo(args.d, args.uid, args.j, AccToken)
+            else:
+                getOraganizationLists(args.d, args.cnt, args.cur, args.j, AccToken)
     elif args.G:
         mainArticle = "Group"
         if args.p:
@@ -1005,10 +1526,10 @@ if __name__ == "__main__":
             if args.d == None or args.n == None or args.adml == None or args.mem == None:
                 usageView(mainArticle, subArticle)
             else:
-                postGroup(args.d, args.n, args.des, args.sn,
+                postGroup('Post', None, args.d, args.n, args.des, args.sn,
                         args.sm, args.ek, args.adml, 
                         args.um, args.un, args.uc, args.ut, args.uf,
-                        args.uM, args.m, args.mem, AccToken)
+                        args.uM, args.m, args.mem, args.j, AccToken)
         elif args.r:
             mainArticle += " Remove"
             subArticle = ["gid"]
@@ -1016,13 +1537,22 @@ if __name__ == "__main__":
                 usageView(mainArticle, subArticle)
             else:
                 deleteGroup(args.gid, AccToken)
-        elif args.gid:
+        elif args.gid and args.a == False:
             mainArticle += " Info"
             subArticle = ["gid"]
             if args.gid == None:
                 usageView(mainArticle, subArticle)
             else:
-                getGroupInfo(args.gid, AccToken)
+                getGroupInfo(args.gid, args.j, AccToken)
+        elif args.a:
+            mainArticle += " Adjust"
+            subArticle = ["d","n","des","gid","sn","sm","ek","adml","um","un",
+                        "uc","ut","uf","uM","m","mem"]
+            if args.d == None or args.gid == None:
+                usageView(mainArticle, subArticle)
+            else:
+                modifyGroup(args.d, args.gid, args.n, args.des, args.sn, args.sm, args.adml, args.um, args.un,
+                            args.uc, args.ut, args.uf, args.uM, args.m, args.mem, args.j, AccToken)
         else :
             getGroupLists(args.d, args.cnt, args.cur, args.gid, args.j, AccToken)
     elif args.et:
@@ -1032,13 +1562,13 @@ if __name__ == "__main__":
         if args.p:
             mainArticle += " Post"
             subArticle = ["m", "cid", "summary", "des", "pt", "sdate", "edate", "rs",
-                        "ri", "rf", "rd", "rm", "udate", "mem"]
+                        "ri", "rf", "rd", "rm", "udate", "mem","loc"]
             if args.m == None or args.cid == None or args.summary == None or args.sdate == None or args.edate == None:
                 usageView(mainArticle, subArticle)
             else:
-                postPlanCalendar(args.m, args.cid, args.summary, args.des, args.pt, args.sdate,
+                postPlanCalendar(args.m, args.cid, args.summary, args.des, args.loc, args.pt, args.sdate,
                                 args.edate, args.tz, args.mem, args.rs, args.ri, args.rf, args.rd, args.rm,
-                                args.udate, AccToken)
+                                args.udate, args.re, AccToken)
         else:
             mainArticle += " Query"
             subArticle = ["m","cid","fdate","udate"]
@@ -1048,16 +1578,64 @@ if __name__ == "__main__":
                 getPlanCalendar(args.m, args.cid, args.fdate, args.udate, args.j, AccToken)
     elif args.D:
         mainArticle = "Shared Drive"
-        if args.p:
-            mainArticle += " Post"
-            subArticle = ["mst","n","des"]
-            if args.n == None or args.mst == None:
+        if args.operation != None:
+            subArticle = ["driveid", "operation", "fileid", "filenm", "fp"]
+            if args.driveid == None or args.operation == None:
                 usageView(mainArticle, subArticle)
             else:
-                postShareDrive(args.mst, args.n, args.des, AccToken)
+                manageShareDriveObject(args.driveid, args.operation, args.fileid, args.filenm, args.fp, args.cur, args.j, AccToken)
         else:
-            mainArticle += " Get"
-            getShareDrive(AccToken)
+            getShareDriveList(AccToken)
+    elif args.Dp:
+        mainArticle = "Drive File / Folder Privilege"
+        subArticle = ["driveid", "privoper", "fileid", "permid"]
+        if args.driveid == None or args.privoper == None or args.fileid == None:
+            mainArticle = mainArticle + " Querying"
+            usageView(mainArticle, subArticle)
+        else:
+            if args.privoper == "create":
+                mainArticle = mainArticle + " Creation"
+                subArticle.extend(["privtype","fileid","m"])
+                if args.privtype == None or args.fileid == None or args.m == None:
+                    usageView(mainArticle, subArticle)
+                # else:
+                #     manageShareDrivePrivs(args.driveid, args.privoper, args.fileid, args.permid, args.j, args.m, args.privtype, AccToken)
+            elif args.privoper == "modify":
+                mainArticle = mainArticle + " Modification"
+                subArticle.extend(["privtype","permid"])
+                if args.privtype == None:
+                    usageView(mainArticle, subArticle)
+                # else:
+                #     manageShareDrivePrivs(args.driveid, args.privoper, args.fileid, args.permid, args.j, args.m, args.privtype, AccToken)
+            elif args.privoper in ["delete", "deleteall"]:
+                mainArticle = mainArticle + " Deletion"
+                if args.privoper == ["delete"] and args.permid == None:
+                    subArticle.append("permid")
+                    usageView(mainArticle, subArticle)
+                # else:
+                #     manageShareDrivePrivs(args.driveid, args.privoper, args.fileid, args.permid, args.j, args.m, args.privtype, AccToken)
+            elif args.privoper in ["enable", "disable"]:
+                mainArticle = mainArticle + " Enable/Disable"              
+            elif args.privoper == "query":
+                None
+            manageShareDrivePrivs(args.driveid, args.privoper, args.fileid, args.permid, args.j, args.m, args.privtype, AccToken)
+                
+                    
+
+
+        
+
+        # manageShareDrivePrivs(args.driveid, args.privoper, args.fileid, args.permid, args.j, args.m, args.privtype, AccToken)
+        # if args.p:
+        #     mainArticle += " Post"
+        #     subArticle = ["mst","n","des"]
+        #     if args.n == None or args.mst == None:
+        #         usageView(mainArticle, subArticle)
+        #     else:
+        #         postShareDrive(args.mst, args.n, args.des, AccToken)
+        # else:
+        #     mainArticle += " Get"
+        #     getShareDriveList(AccToken)
 
 
 

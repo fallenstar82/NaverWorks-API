@@ -1,0 +1,311 @@
+Script started on Fri Sep  1 11:11:21 2023
+Restored session: 2023년 8월 31일 목요일 20시 47분 21초 KST
+[1m[7m%[27m[1m[0m                                                                                                                                                                                  ]7;file://pool-100-10-10-47.prvdri.fios.verizon.net/Users/fallenstar/Documents/GitHub/NaverWorks-API[0m[27m[24m[Jfallenstar@pool-100-10-10-47 NaverWorks-API % [K[?2004h[7m python3 ./worksapi.py -ca --m admin@korec.by-works.com | egrep "수업일정|Cursor" [27m[82D[27m [27mp[27my[27mt[27mh[27mo[27mn[27m3[27m [27m.[27m/[27mw[27mo[27mr[27mk[27ms[27ma[27mp[27mi[27m.[27mp[27my[27m [27m-[27mc[27ma[27m [27m-[27m-[27mm[27m [27ma[27md[27mm[27mi[27mn[27m@[27mk[27mo[27mr[27me[27mc[27m.[27mb[27my[27m-[27mw[27mo[27mr[27mk[27ms[27m.[27mc[27mo[27mm[27m [27m|[27m [27me[27mg[27mr[27me[27mp[27m [27m"[27m수[27m[27m업[27m[27m일[27m[27m정[27m[27m|[27mC[27mu[27mr[27ms[27mo[27mr[27m"[27m [?2004l
+c_300097142_031d3bf1-339d-4cb5-a453-aa57c3eac7bc   : 이백초등학교 수업일정                                  
+c_300097142_04ec1d52-3a9e-47c6-80c8-2041db3811a2   : 초촌초등학교 수업일정                                  
+c_300097142_057d635e-14d8-417f-86fa-825cf5aa513c   : 목면초등학교 수업일정                                  
+c_300097142_05dbe98e-e132-4a1d-a9ef-b2beb199549c   : 성덕초등학교 수업일정                                  
+c_300097142_0712c1e1-463f-49ec-ba5d-14bc044bc569   : 신암초등학교 수업일정                                  
+c_300097142_083a6216-ca6c-44bc-a9f0-f8716bd3c093   : 연동초등학교 수업일정                                  
+c_300097142_084967a7-038a-4427-ac1c-1570cd8c9b88   : 정미초등학교 수업일정                                  
+c_300097142_0a3194c9-b0e8-461e-85f6-6a1ba9df16f9   : 가평중학교 수업일정                                   
+c_300097142_0bcc6a9d-d746-4543-9b22-c14c14568e92   : 신암중학교 수업일정                                   
+c_300097142_0bea65d4-b411-40c3-b685-90988e6304e7   : 근흥초등학교 수업일정                                  
+c_300097142_0ccdba1d-ea7d-4472-990f-7374f76984e0   : 서정초등학교 수업일정                                  
+c_300097142_0ce5d581-5895-4a90-b73f-35fc2af89e4e   : 화양초등학교 수업일정                                  
+c_300097142_0d09946b-d8a1-477c-8cf4-0109e1fa7d55   : 미원초등학교 장락분교장 수업일정                            
+c_300097142_0f15ab57-f5a4-4e93-900b-9075265602a0   : 행정초등학교 수업일정                                  
+c_300097142_0fb43462-3349-4990-a986-5e29b25f850e   : 한정초등학교 수업일정                                  
+c_300097142_10b68139-6d22-44f5-b17f-0a68db501842   : 옥산초등학교 수업일정                                  
+Next Cursor : H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyNdBRSs4vzSsBMWsBxuyKJBsAAAA
+[1m[7m%[27m[1m[0m                                                                                                                                                                                  ]7;file://pool-100-10-10-47.prvdri.fios.verizon.net/Users/fallenstar/Documents/GitHub/NaverWorks-API[0m[27m[24m[Jfallenstar@pool-100-10-10-47 NaverWorks-API % [K[?2004hsset -o vi[?2004l
+[1m[7m%[27m[1m[0m                                                                                                                                                                                  ]7;file://pool-100-10-10-47.prvdri.fios.verizon.net/Users/fallenstar/Documents/GitHub/NaverWorks-API[0m[27m[24m[Jfallenstar@pool-100-10-10-47 NaverWorks-API % [K[?2004hset -o vi[8D python3 ./worksapi.py -ca --m admin@korec.by-works.com | egrep "수업일정|Cursor" [17D-| egrep "수업일정|Cursor" [26D-| egrep "수업일정|Cursor" [26Dc| egrep "수업일정|Cursor" [26Du| egrep "수업일정|Cursor" [26Dr| egrep "수업일정|Cursor" [26D | egrep "수업일정|Cursor" [26D[7mH[7m4[7ms[7mI[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mK[7mt[7mW[7mS[7mi[7mv[7mK[7mz[7m_[7mX[7mM[7mS[7m0[7mmtULIyNdBRSs4vzSsBMWsBxuyKJBsAAAA[27m| egrep "수업일정|Cursor"[K[A[153C[59D[27mH[27m4[27ms[27mI[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mK[27mt[27mW[27mS[27mi[27mv[27mK[27mz[27m_[27mX[27mM[27mS[27m0[27mm[27mt[27mU[27mL[27mI[27my[27mN[27md[27mB[27mR[27mS[27ms[27m4[27mv[27mz[27mS[27ms[27mB[27mM[27mW[27ms[27mB[27mx[27mu[27my[27mK[27mJ[27mB[27ms[27mA[27mA[27mA[27mA | egrep "[7m [27m수업일정|Cursor"[A[152C[?2004l[1B
+c_300097142_117e8510-48ca-4944-9fb5-b47e855af3eb   : 호계초등학교 수업일정                                  
+c_300097142_11a45c67-0c31-475f-a609-60d384466d5f   : 태봉초등학교 수업일정                                  
+c_300097142_129c086f-3f72-4c9b-ac11-7e7df8ab17e9   : 금산초등학교_춘천 수업일정                               
+c_300097142_12aa6585-2129-4f36-9ada-bd0dc6646b4b   : 서벽초등학교 수업일정                                  
+c_300097142_140adcfe-6e47-4fc0-8bac-eb152775d4c4   : 강경산양초등학교 수업일정                                
+c_300097142_1490637f-6ff8-4694-a729-8cd28bbd8806   : 팔봉초등학교 수업일정                                  
+c_300097142_14db52d7-8d42-4c1b-ac1f-84cd031b976a   : 천동초등학교 수업일정                                  
+c_300097142_166db132-b88e-4bc6-b7b7-5290c29f947e   : 탄천초등학교 수업일정                                  
+c_300097142_176de1df-8767-42a8-b8dc-f4e706716cb4   : 미원초등학교 수업일정                                  
+c_300097142_178f7313-c47d-4a59-a09a-03cdd9e9c462   : 방산초등학교 수업일정                                  
+c_300097142_17d8f17c-402a-4460-89a1-818f8f3b4e47   : 귀래중학교 수업일정                                   
+c_300097142_1882b90c-07c8-435d-a9e3-b0c4c6243134   : 남원용성중학교 수업일정                                 
+c_300097142_18e62428-c06f-4faf-8b01-bc632fb6d475   : 천남중학교 수업일정                                   
+c_300097142_19615d80-f0d3-4e49-87c2-c5e229ad9271   : 남원서원초등학교 수업일정                                
+c_300097142_19b7af36-abd7-4876-a2aa-b14e8a8c404a   : 개화초등학교 수업일정                                  
+c_300097142_1a096ab7-d8f1-47c0-b43c-29a931e3b29f   : 구산초등학교 수업일정                                  
+c_300097142_1a9b8b46-606d-40f3-9f44-1654621b04ae   : 수왕초등학교 수업일정                                  
+c_300097142_1c4e05b8-f911-4a9d-b51e-dc7775d9700b   : 조종중학교 수업일정                                   
+c_300097142_1c4ec34f-c57e-402d-aae6-3191bbf666f4   : 송호초등학교 수업일정                                  
+c_300097142_1d91b14b-2d02-4439-b417-c96abf16a79c   : 상운초등학교 수업일정                                  
+c_300097142_1df81d4e-c481-4a12-bab7-7fc3bebd535e   : 부강초등학교 수업일정                                  
+c_300097142_1e706756-c2bb-499f-bfc8-d61cf9d24174   : 군북초등학교 수업일정                                  
+c_300097142_1ef73166-298b-45b0-ad8c-242ecffbfda5   : 미당초등학교 수업일정                                  
+c_300097142_1f01b34e-1e11-487a-b90b-f7f9dc528fe5   : 운산초등학교 수업일정                                  
+c_300097142_1f2d5b7a-9176-4fa3-b9fd-21ad6a76d10c   : 쌍봉초등학교 수업일정                                  
+Next Cursor : H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyNDDQUUrOL80rUbIyNagFANZyNoQcAAAA
+[1m[7m%[27m[1m[0m                                                                                                                                                                                  ]7;file://pool-100-10-10-47.prvdri.fios.verizon.net/Users/fallenstar/Documents/GitHub/NaverWorks-API[0m[27m[24m[Jfallenstar@pool-100-10-10-47 NaverWorks-API % [K[?2004h python3 ./worksapi.py -ca --m admin@korec.by-works.com --cur H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyNdBRSs4vzSsBMWsBxuyKJBsAAAA | egrep "[7m [27m수업일정|Cursor"[K[A[160C[60D[1C[1C[1C[1C[1C[1C[60P[9C[27m수업일정|Cursor"[K[1B[K[A[108C[7mH[7m4[7ms[7mI[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mK[7mt[7mW[7mS[7mi[7mv[7mK[7mz[7m_[7mX[7mM[7mS[7m0[7mmtULIyNDDQUUrOL80rUbIyNagFANZyNoQcAAAA[27m| egrep "수업일정|Cursor"[K[A[153C[64D[27mH[27m4[27ms[27mI[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mK[27mt[27mW[27mS[27mi[27mv[27mK[27mz[27m_[27mX[27mM[27mS[27m0[27mm[27mt[27mU[27mL[27mI[27my[27mN[27mD[27mD[27mQ[27mU[27mU[27mr[27mO[27mL[27m8[27m0[27mr[27mU[27mb[27mI[27my[27mN[27ma[27mg[27mF[27mA[27mN[27mZ[27my[27mN[27mo[27mQ[27mc[27mA[27mA[27mA[27mA[1C[?2004l[1B
+c_300097142_20878953-70b4-42c8-a635-f788d6f78335   : 가평마장초등학교 수업일정                                
+c_300097142_22c7e58f-dee6-4d0e-b0b1-b0152a2d4609   : 물야초등학교 수업일정                                  
+c_300097142_22dd8235-4071-45e6-ae77-b75c9c9c1bdd   : 조양초등학교 수업일정                                  
+c_300097142_22f53c19-6c1e-4164-a582-05d811e2bdc9   : 당진중학교대호지분교 수업일정                              
+c_300097142_23bb8209-9c28-4371-875d-612f5ca17666   : 부석중학교 수업일정                                   
+c_300097142_23ca0cbc-2932-417d-8e00-6529c17de7ae   : 웅천초등학교 수업일정                                  
+c_300097142_2493a237-7387-4bf3-8af6-5e11c97a83bc   : 광판초등학교 수업일정                                  
+c_300097142_24974f29-a7df-484d-bf73-79db32d89b65   : 가남초등학교 수업일정                                  
+c_300097142_249f128e-edb9-4db9-b5ed-8c8267158084   : 부적초등학교 수업일정                                  
+c_300097142_24bd23f5-8bf5-4cc9-a297-60c0e61459c9   : 기산초등학교 수업일정                                  
+c_300097142_26bc8910-164c-42c9-8741-11c5a1040911   : 전의중학교 수업일정                                   
+c_300097142_26d68bea-feea-4d65-862e-ee3e1a886014   : 대성초등학교_가평 수업일정                               
+c_300097142_2794f11d-f4a0-4888-ab61-f2b5a26c4872   : 연동중학교 수업일정                                   
+c_300097142_28ff9ad8-6da4-46c2-8200-1d7e2c49d177   : 대술중학교 수업일정                                   
+c_300097142_2b50edb7-4154-4710-9915-24376bb0b301   : 양촌초등학교 수업일정                                  
+c_300097142_2c7913eb-95f2-4b15-9a95-50684bdd65f0   : 청라초등학교 수업일정                                  
+Next Cursor : H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyNDXQUUrOL80rUbIyNagFALsclQAcAAAA
+[1m[7m%[27m[1m[0m                                                                                                                                                                                  ]7;file://pool-100-10-10-47.prvdri.fios.verizon.net/Users/fallenstar/Documents/GitHub/NaverWorks-API[0m[27m[24m[Jfallenstar@pool-100-10-10-47 NaverWorks-API % [K[?2004h python3 ./worksapi.py -ca --m admin@korec.by-works.com --cur H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyNDDQUUrOL80rUbIyNagFANZyNoQcAAAA| egrep "수업일정|Cursor"[K[17D[A[172C[66D[25D[4C[1C[1C[1C[1C[1C[1C[1C[1C[2C[1C[5C[1C[3C[3C[3C[1C[1C| egrep "수업일정|Cursor"[K[1B[K[A[108C[7mH[7m4[7ms[7mI[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mK[7mt[7mW[7mS[7mi[7mv[7mK[7mz[7m_[7mX[7mM[7mS[7m0[7mmtULIyNDXQUUrOL80rUbIyNagFALsclQAcAAAA[27m| egrep "수업일정|Cursor"[K[A[153C[64D[27mH[27m4[27ms[27mI[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mK[27mt[27mW[27mS[27mi[27mv[27mK[27mz[27m_[27mX[27mM[27mS[27m0[27mm[27mt[27mU[27mL[27mI[27my[27mN[27mD[27mX[27mQ[27mU[27mU[27mr[27mO[27mL[27m8[27m0[27mr[27mU[27mb[27mI[27my[27mN[27ma[27mg[27mF[27mA[27mL[27ms[27mc[27ml[27mQ[27mA[27mc[27mA[27mA[27mA[27mA[?2004l[1B
+c_300097142_2d7416e3-927f-496e-8650-0482563c595d   : 장암초등학교 수업일정                                  
+c_300097142_2e3cee07-c858-46eb-a985-cd9d56cebae8   : 삼봉초등학교 수업일정                                  
+c_300097142_2f9355d1-7ef5-4665-9c71-8e66bd9c8f5c   : 청양초등학교 수업일정                                  
+c_300097142_3125a6b4-d0a0-4d65-bae3-abbe261db27f   : 쌍류초등학교 수업일정                                  
+c_300097142_31c77278-19b8-4afb-8bbd-549eabe8205d   : 둔둔초등학교 수업일정                                  
+c_300097142_33999fa3-d2a0-44cd-abee-85639b3a6c5e   : 금산중앙초등학교 수업일정                                
+c_300097142_342df35a-dd1e-48d3-8a2e-81d8361dae27   : 부내초등학교 수업일정                                  
+c_300097142_3541806e-1465-4e99-940f-bd575022e64a   : 온양초사초등학교 수업일정                                
+c_300097142_3572749f-9f8f-43df-a325-c4e6fa66bc36   : 추부초등학교 수업일정                                  
+c_300097142_35871b76-a9ca-49d3-bd29-1bbde92d9a8d   : 조종고등학교 수업일정                                  
+c_300097142_368a9c24-2ce1-4696-97b4-26e479966541   : 관대초등학교 수업일정                                  
+c_300097142_38e592aa-e382-4e13-a948-952f242e0cc0   : 맹동초등학교 수업일정                                  
+c_300097142_3a33d6d4-9ff1-48b5-bdb3-2fd4f68dab1b   : 정안초등학교 수업일정                                  
+c_300097142_3a36967b-59f4-402e-98e8-421dd7e7b53f   : 소천초등학교 수업일정                                  
+c_300097142_3b597343-646d-43c2-a65b-cbc48387959b   : 신가초등학교 수업일정                                  
+c_300097142_3c368b00-28be-4bb5-809d-65245ee9980b   : 마곡초등학교 수업일정                                  
+c_300097142_3c3b0f74-bdfd-4f80-97cb-b41d5bdb63e0   : 한산초등학교 수업일정                                  
+Next Cursor : H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyMjDQUUrOL80rUbIyNagFAK8YS5UcAAAA
+[1m[7m%[27m[1m[0m                                                                                                                                                                                  ]7;file://pool-100-10-10-47.prvdri.fios.verizon.net/Users/fallenstar/Documents/GitHub/NaverWorks-API[0m[27m[24m[Jfallenstar@pool-100-10-10-47 NaverWorks-API % [K[?2004h python3 ./worksapi.py -ca --m admin@korec.by-works.com --cur H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyNDXQUUrOL80rUbIyNagFALsclQAcAAAA| egrep "수업일정|Cursor"[K[17D[A[172C[66D[1C[3C[1C[1C| egrep "수업일정|Cursor"[K[1B[K[A[108C[7mH[7m4[7ms[7mI[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mK[7mt[7mW[7mS[7mi[7mv[7mK[7mz[7m_[7mX[7mM[7mS[7m0[7mmtULIyMjDQUUrOL80rUbIyNagFAK8YS5UcAAAA[27m| egrep "수업일정|Cursor"[K[A[153C[64D[27mH[27m4[27ms[27mI[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mK[27mt[27mW[27mS[27mi[27mv[27mK[27mz[27m_[27mX[27mM[27mS[27m0[27mm[27mt[27mU[27mL[27mI[27my[27mM[27mj[27mD[27mQ[27mU[27mU[27mr[27mO[27mL[27m8[27m0[27mr[27mU[27mb[27mI[27my[27mN[27ma[27mg[27mF[27mA[27mK[27m8[27mY[27mS[27m5[27mU[27mc[27mA[27mA[27mA[27mA[?2004l[1B
+c_300097142_3e239deb-be37-4010-bad3-0e206deba92e   : 황둔중학교 수업일정                                   
+c_300097142_3e7f31db-aad3-4446-b7fa-68b2e02868fe   : 금대초등학교 수업일정                                  
+c_300097142_3facfcc8-772a-4e0d-b5b3-498169e828d9   : 춘성중학교 수업일정                                   
+c_300097142_3fc52a62-7205-417a-8ad6-c9f7f1f20998   : 내산초등학교 수업일정                                  
+c_300097142_3fd105f6-7499-40df-8051-f3143838ef6c   : 태안초등학교 수업일정                                  
+c_300097142_413b03ec-1415-4ef4-909f-a9295f8ff14c   : 내성초등학교 수업일정                                  
+c_300097142_447be281-c1eb-405c-85e3-9472b2a9e9f9   : 쌍룡초등학교 수업일정                                  
+c_300097142_44e9e3ed-be41-4761-b95f-f94c16bb2573   : 수지중학교 수업일정                                   
+c_300097142_45f426b1-ba26-4057-8956-d8665d833ad4   : 석양초등학교 수업일정                                  
+c_300097142_4777ee88-c08f-40fc-974d-311d1fcb5593   : 해남동초등학교 수업일정                                 
+c_300097142_47e14c4f-af24-4512-ae98-53a73d3c574c   : 상리초등학교 수업일정                                  
+c_300097142_497e9563-387a-4c34-bd80-843c48b88bab   : 평곡초등학교 수업일정                                  
+Next Cursor : H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyMjXQUUrOL80rUbIyNagFAMJ26BEcAAAA
+[1m[7m%[27m[1m[0m                                                                                                                                                                                  ]7;file://pool-100-10-10-47.prvdri.fios.verizon.net/Users/fallenstar/Documents/GitHub/NaverWorks-API[0m[27m[24m[Jfallenstar@pool-100-10-10-47 NaverWorks-API % [K[?2004h python3 ./worksapi.py -ca --m admin@korec.by-works.com --cur H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyMjDQUUrOL80rUbIyNagFAK8YS5UcAAAA| egrep "수업일정|Cursor"[K[17D[A[172C[66D[1C[3C[1C[1C| egrep "수업일정|Cursor"[K[1B[K[A[108C[7mH[7m4[7ms[7mI[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mK[7mt[7mW[7mS[7mi[7mv[7mK[7mz[7m_[7mX[7mM[7mS[7m0[7mmtULIyMjXQUUrOL80rUbIyNagFAMJ26BEcAAAA[27m| egrep "수업일정|Cursor"[K[A[153C[64D[27mH[27m4[27ms[27mI[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mK[27mt[27mW[27mS[27mi[27mv[27mK[27mz[27m_[27mX[27mM[27mS[27m0[27mm[27mt[27mU[27mL[27mI[27my[27mM[27mj[27mX[27mQ[27mU[27mU[27mr[27mO[27mL[27m8[27m0[27mr[27mU[27mb[27mI[27my[27mN[27ma[27mg[27mF[27mA[27mM[27mJ[27m2[27m6[27mB[27mE[27mc[27mA[27mA[27mA[27mA[?2004l[1B
+c_300097142_4b6cd87f-ae98-4c08-880c-31da5ccdde57   : 금지동초등학교 수업일정                                 
+c_300097142_4cac0aaf-b0b0-40b5-8c49-50165b67babc   : 의랑초등학교 수업일정                                  
+c_300097142_4cc783f5-0c30-4dd3-9f0e-19cd65d7ef45   : 마산초등학교_해남 수업일정                               
+c_300097142_4d2868a1-f788-4612-9cfa-34a355841eec   : 문산초등학교 수업일정                                  
+c_300097142_4e28e4db-1f77-45d3-8ac5-563c4a92a440   : 마산초등학교_서천 수업일정                               
+c_300097142_505065e0-f800-4dc3-aae1-8da2af101c3c   : 위례초등학교 수업일정                                  
+c_300097142_50720be2-c1de-418e-b4dd-fdd59ee04452   : 오동초등학교 수업일정                                  
+c_300097142_508e074d-14d1-48fb-b492-8e5636792438   : 고산초등학교_원주 수업일정                               
+c_300097142_51f0b95b-5858-48e6-829d-58ae1a9e77c2   : 서상초등학교 수업일정                                  
+c_300097142_52a0afd2-5d6a-450b-8172-54d8cc6e2427   : 보산원초등학교 수업일정                                 
+c_300097142_553d16f6-5c7c-4b54-a8ce-19c0fa5e3477   : 봉성초등학교 수업일정                                  
+c_300097142_55808550-b76a-404d-86d7-4081b9c1b0da   : 이화초등학교 수업일정                                  
+c_300097142_57520bed-e187-4cf7-977c-9126fde381af   : 화산초등학교 수업일정                                  
+c_300097142_59bb3a53-2a68-4fa1-acda-44e0a0794ac4   : 창기초등학교 수업일정                                  
+Next Cursor : H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyNjDQUUrOL80rUbIyNagFAEfDsCwcAAAA
+[1m[7m%[27m[1m[0m                                                                                                                                                                                  ]7;file://pool-100-10-10-47.prvdri.fios.verizon.net/Users/fallenstar/Documents/GitHub/NaverWorks-API[0m[27m[24m[Jfallenstar@pool-100-10-10-47 NaverWorks-API % [K[?2004h python3 ./worksapi.py -ca --m admin@korec.by-works.com --cur H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyMjXQUUrOL80rUbIyNagFAMJ26BEcAAAA| egrep "수업일정|Cursor"[K[17D[A[172C[66D| egrep "수업일정|Cursor"[K[1B[K[A[108C[7mH[7m4[7ms[7mI[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mK[7mt[7mW[7mS[7mi[7mv[7mK[7mz[7m_[7mX[7mM[7mS[7m0[7mmtULIyNjDQUUrOL80rUbIyNagFAEfDsCwcAAAA[27m| egrep "수업일정|Cursor"[K[A[153C[64D[27mH[27m4[27ms[27mI[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mK[27mt[27mW[27mS[27mi[27mv[27mK[27mz[27m_[27mX[27mM[27mS[27m0[27mm[27mt[27mU[27mL[27mI[27my[27mN[27mj[27mD[27mQ[27mU[27mU[27mr[27mO[27mL[27m8[27m0[27mr[27mU[27mb[27mI[27my[27mN[27ma[27mg[27mF[27mA[27mE[27mf[27mD[27ms[27mC[27mw[27mc[27mA[27mA[27mA[27mA[?2004l[1B
+c_300097142_5c355079-40ce-4247-ba04-9deb2f3bbcaf   : 성남초등학교 수업일정                                  
+c_300097142_5c63d350-c364-4466-b0b6-fcebc1eab0ed   : 부석초등학교 수업일정                                  
+c_300097142_5cc9613c-f457-4ac9-a4cf-023f38143b8b   : 화산중학교 수업일정                                   
+c_300097142_5cd26a5d-21dd-40a0-8080-62f50cb3ec73   : 청룡초등학교_보령 수업일정                               
+c_300097142_5cf51021-03c9-47b4-96ed-593ca80f6cb2   : 원천초등학교 수업일정                                  
+c_300097142_5d7959de-3329-447d-97b9-fbd98971c621   : 수덕초등학교 수업일정                                  
+c_300097142_5db6af1e-f721-46f7-be7d-118cbe743d49   : 금성초등학교 수업일정                                  
+c_300097142_5f17dd5a-175f-4d5a-a16b-611880aa7632   : 금남초등학교 수업일정                                  
+c_300097142_5f86d175-7c00-43d0-b751-1fa3425ffdd0   : 금산초등학교_금산 수업일정                               
+c_300097142_60478fe3-66ee-4fd2-960d-a30b7e62bc78   : 서곡초등학교 수업일정                                  
+c_300097142_616887f8-cc67-4cdd-9233-c9ac05f63d55   : 연남초등학교 수업일정                                  
+c_300097142_63187056-c0cd-466a-a17c-696b8cb435b2   : 봉화초등학교 수업일정                                  
+c_300097142_66186986-5dea-40ba-b7f2-262ebf83cdc8   : 응봉초등학교 수업일정                                  
+c_300097142_674f9dbb-b869-4a15-976c-48b82d390aea   : 외산초등학교 수업일정                                  
+c_300097142_678c7c54-f421-444e-9d00-8e3164d2366b   : 남신초등학교 수업일정                                  
+c_300097142_68229302-2af8-4973-a1eb-49710dc3e309   : 만종초등학교 수업일정                                  
+Next Cursor : H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyNjXQUUrOL80rUbIyNagFACqtE6gcAAAA
+[1m[7m%[27m[1m[0m                                                                                                                                                                                  ]7;file://pool-100-10-10-47.prvdri.fios.verizon.net/Users/fallenstar/Documents/GitHub/NaverWorks-API[0m[27m[24m[Jfallenstar@pool-100-10-10-47 NaverWorks-API % [K[?2004h python3 ./worksapi.py -ca --m admin@korec.by-works.com --cur H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyNjDQUUrOL80rUbIyNagFAEfDsCwcAAAA| egrep "수업일정|Cursor"[K[17D[A[172C[66D[1C[1C[2C[1C[1C| egrep "수업일정|Cursor"[K[1B[K[A[108C[7mH[7m4[7ms[7mI[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mK[7mt[7mW[7mS[7mi[7mv[7mK[7mz[7m_[7mX[7mM[7mS[7m0[7mmtULIyNjXQUUrOL80rUbIyNagFACqtE6gcAAAA[27m| egrep "수업일정|Cursor"[K[A[153C[64D[27mH[27m4[27ms[27mI[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mK[27mt[27mW[27mS[27mi[27mv[27mK[27mz[27m_[27mX[27mM[27mS[27m0[27mm[27mt[27mU[27mL[27mI[27my[27mN[27mj[27mX[27mQ[27mU[27mU[27mr[27mO[27mL[27m8[27m0[27mr[27mU[27mb[27mI[27my[27mN[27ma[27mg[27mF[27mA[27mC[27mq[27mt[27mE[27m6[27mg[27mc[27mA[27mA[27mA[27mA[?2004l[1B
+c_300097142_6884245e-d03e-4cea-9c2a-2eea366b697a   : 매지초등학교 수업일정                                  
+c_300097142_6c4ff82c-5fab-4d66-bae7-954fd060e58a   : 상면초등학교 수업일정                                  
+c_300097142_720c9981-04a6-45ed-8a83-f07f6cb1ce9b   : 부리중학교 수업일정                                   
+c_300097142_724a3dc8-e3d1-4ae8-83cb-593ceed8f0b9   : 재산초등학교 수업일정                                  
+c_300097142_73e47ba6-f892-460c-b7d0-bab75d6d32d9   : 신림중학교 수업일정                                   
+c_300097142_742ae3a7-d09f-448c-b86e-e40b54f0c005   : 광시중학교 수업일정                                   
+c_300097142_74a268e9-695e-4e82-b808-2beb7e8c17c3   : 비인초등학교 수업일정                                  
+c_300097142_74c56a5f-fc40-4caf-926b-0016fd117cac   : 부리초등학교 수업일정                                  
+c_300097142_75bcea03-f5d3-450c-9af9-bc96f90c9617   : 동성초등학교 수업일정                                  
+c_300097142_760d4247-1d5b-4594-8814-706a24f3d016   : 대기초등학교 수업일정                                  
+c_300097142_76794fe3-bf7c-4e3f-a6bb-c04178673619   : 음성여중학교 수업일정                                  
+c_300097142_76be3120-38c9-4c38-bdaf-afe329ec7fd7   : 양화초등학교 수업일정                                  
+c_300097142_76ed6d56-e14e-415f-a4a6-b19d37823089   : 송지초등학교 수업일정                                  
+c_300097142_79c1cd84-26a9-488a-a938-a4c3b8facf07   : 이인중학교 수업일정                                   
+c_300097142_7b419c9b-d433-4d69-a38b-bb9604ad6ae2   : 연하초등학교 수업일정                                  
+Next Cursor : H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyMTDQUUrOL80rUbIyNagFAF3MsbccAAAA
+[1m[7m%[27m[1m[0m                                                                                                                                                                                  ]7;file://pool-100-10-10-47.prvdri.fios.verizon.net/Users/fallenstar/Documents/GitHub/NaverWorks-API[0m[27m[24m[Jfallenstar@pool-100-10-10-47 NaverWorks-API % [K[?2004h python3 ./worksapi.py -ca --m admin@korec.by-works.com --cur H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyNjXQUUrOL80rUbIyNagFACqtE6gcAAAA| egrep "수업일정|Cursor"[K[17D[A[172C[66D[1C[3C[65C[62D| egrep "수업일정|Cursor"[K[1B[K[A[108C[7mH[7m4[7ms[7mI[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mK[7mt[7mW[7mS[7mi[7mv[7mK[7mz[7m_[7mX[7mM[7mS[7m0[7mmtULIyMTDQUUrOL80rUbIyNagFAF3MsbccAAAA[27m| egrep "수업일정|Cursor"[K[A[153C[64D[27mH[27m4[27ms[27mI[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mK[27mt[27mW[27mS[27mi[27mv[27mK[27mz[27m_[27mX[27mM[27mS[27m0[27mm[27mt[27mU[27mL[27mI[27my[27mM[27mT[27mD[27mQ[27mU[27mU[27mr[27mO[27mL[27m8[27m0[27mr[27mU[27mb[27mI[27my[27mN[27ma[27mg[27mF[27mA[27mF[27m3[27mM[27ms[27mb[27mc[27mc[27mA[27mA[27mA[27mA[?2004l[1B
+c_300097142_7be9b311-fac7-45ed-96e2-ad3eb91b57dd   : 신화초등학교 수업일정                                  
+c_300097142_7c35ef05-d32b-44d1-bcf6-4a090c953939   : 소초초등학교 수업일정                                  
+c_300097142_7d84a110-b627-48fa-be7d-09e65e701eb7   : 오성초등학교 수업일정                                  
+c_300097142_7d9b8bb7-d87d-4399-9f6d-14d024257572   : 동광초등학교 수업일정                                  
+c_300097142_7e94afd3-ad04-4b5d-9e89-5c05d0d56580   : 우성초등학교 수업일정                                  
+c_300097142_80151d47-2d99-4d57-b7f6-667c1aa8be94   : 낙동초등학교 수업일정                                  
+c_300097142_80654ea5-2dcf-4d90-af76-42fa2a5ab13f   : 오갑초등학교 수업일정                                  
+c_300097142_815965eb-81fb-48c8-88ab-83087d9228fb   : 청보초등학교 수업일정                                  
+c_300097142_81618b81-4b4c-41c4-a566-1e2085b1f126   : 동내초등학교 수업일정                                  
+c_300097142_81d798ef-1007-485b-9c40-ced343e67d4f   : 아영초등학교 수업일정                                  
+c_300097142_8220a2b5-0f25-4b5d-9f3d-bcbe23c6bf67   : 우수영초등학교 수업일정                                 
+c_300097142_826f427c-cf83-4ada-9553-f6449c4f33f0   : 안중초등학교 수업일정                                  
+c_300097142_82ef86b8-b271-425f-81b0-71f5cf4ee116   : 왕전초등학교 수업일정                                  
+c_300097142_82f7a368-a025-4c13-84d0-14420c5f484c   : 서부초등학교 수업일정                                  
+c_300097142_83de1b3c-3623-4aa2-91cb-c6ce4bf6d42d   : 대성초등학교_고성 수업일정                               
+c_300097142_8527fe5b-3b7c-408f-9359-bdbca53570a9   : 율길초등학교 수업일정                                  
+c_300097142_85f013e4-e407-42f9-bb62-cb436e482b1f   : 이원초등학교 수업일정                                  
+c_300097142_888adeb7-4d34-49db-8d39-12b671c43fe5   : 주생초등학교 수업일정                                  
+c_300097142_88c595ff-ff40-4565-9588-aeb91760e1da   : 천의초등학교 수업일정                                  
+c_300097142_897d443b-e559-4c38-9da3-55d6c42e7e32   : 청평중학교 수업일정                                   
+c_300097142_8a0dc6b4-329f-480a-a8af-fa31890c8453   : 용동초등학교 수업일정                                  
+c_300097142_8b6c2bd4-6da5-4a50-aa54-35463829f87c   : 아영중학교 수업일정                                   
+Next Cursor : H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyMTXQUUrOL80rUbIyNagFADCiEjMcAAAA
+[1m[7m%[27m[1m[0m                                                                                                                                                                                  ]7;file://pool-100-10-10-47.prvdri.fios.verizon.net/Users/fallenstar/Documents/GitHub/NaverWorks-API[0m[27m[24m[Jfallenstar@pool-100-10-10-47 NaverWorks-API % [K[?2004h python3 ./worksapi.py -ca --m admin@korec.by-works.com --cur H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyMTDQUUrOL80rUbIyNagFAF3MsbccAAAA| egrep "수업일정|Cursor"[K[17D[A[172C[66D[1C[1C[2C[1C[1C| egrep "수업일정|Cursor"[K[1B[K[A[108C[7mH[7m4[7ms[7mI[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mK[7mt[7mW[7mS[7mi[7mv[7mK[7mz[7m_[7mX[7mM[7mS[7m0[7mmtULIyMTXQUUrOL80rUbIyNagFADCiEjMcAAAA[27m| egrep "수업일정|Cursor"[K[A[153C[64D[27mH[27m4[27ms[27mI[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mK[27mt[27mW[27mS[27mi[27mv[27mK[27mz[27m_[27mX[27mM[27mS[27m0[27mm[27mt[27mU[27mL[27mI[27my[27mM[27mT[27mX[27mQ[27mU[27mU[27mr[27mO[27mL[27m8[27m0[27mr[27mU[27mb[27mI[27my[27mN[27ma[27mg[27mF[27mA[27mD[27mC[27mi[27mE[27mj[27mM[27mc[27mA[27mA[27mA[27mA[?2004l[1B
+c_300097142_8c92d7bd-f18e-48a6-bfd3-055556ce5c9a   : 남원왕치초등학교 수업일정                                
+c_300097142_8cbdd790-e84e-48a8-9f6f-a7c330cac682   : 청남초등학교 수업일정                                  
+c_300097142_8f071940-9381-471d-8655-1b33b6f11af8   : 춘양초등학교 수업일정                                  
+c_300097142_8fbb10e7-5267-4edf-af57-04a5fc6b5273   : 대흥초등학교 수업일정                                  
+c_300097142_91409842-6f03-4498-abd3-1bc735e0627a   : 백화초등학교 수업일정                                  
+c_300097142_927a2d02-8b3d-4127-940e-feba78e73134   : 고대중학교 수업일정                                   
+c_300097142_93b4f62c-f3e7-411d-be50-5280732a3401   : 이인초등학교 수업일정                                  
+c_300097142_94e16fc6-178d-488e-9a3b-b889dd0f4c71   : 송동초등학교 수업일정                                  
+c_300097142_952d5044-8652-4e17-815f-45583ec675df   : 평촌초등학교 수업일정                                  
+c_300097142_9584dfed-1d27-4ec8-b343-d77ff39f1fe6   : 풍세초등학교 수업일정                                  
+c_300097142_95cc5662-c885-46bf-9753-d92868df39d2   : 영오초등학교 수업일정                                  
+c_300097142_970b7448-16f4-4961-b0ef-bdd8289d0878   : 청신여자중학교 수업일정                                 
+c_300097142_979e7bc4-2f38-436b-a7af-a70f2f5f34b3   : 법전중앙초등학교 수업일정                                
+c_300097142_98476be0-3ad8-4712-9592-370cba4dd850   : 삼산초등학교_해남 수업일정                               
+c_300097142_98550ef0-8619-47be-920c-847a6d2b42f0   : 오산초등학교 수업일정                                  
+c_300097142_98c1b072-22d9-4b67-b5a3-e00a0cdda3c9   : 동양초등학교 수업일정                                  
+Next Cursor : H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyNTDQUUrOL80rAbFrAbUXSg4cAAAA
+[1m[7m%[27m[1m[0m                                                                                                                                                                                  ]7;file://pool-100-10-10-47.prvdri.fios.verizon.net/Users/fallenstar/Documents/GitHub/NaverWorks-API[0m[27m[24m[Jfallenstar@pool-100-10-10-47 NaverWorks-API % [K[?2004h python3 ./worksapi.py -ca --m admin@korec.by-works.com --cur H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyMTXQUUrOL80rUbIyNagFADCiEjMcAAAA| egrep "수업일정|Cursor"[K[17D[A[172C[66D[1C[3C[1C[P[70Cp [P[18C [A[87C| egrep "수업일정|Cursor"[K[1B[K[A[107C | egrep "수업일정|Cursor" [26D[7mH[7m4[7ms[7mI[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mK[7mt[7mW[7mS[7mi[7mv[7mK[7mz[7m_[7mX[7mM[7mS[7m0[7mmtULIyNTDQUUrOL80rAbFrAbUXSg4cAAAA[27m| egrep "[7m [27m수업일정|Cursor"[K[A[152C[60D[27mH[27m4[27ms[27mI[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mK[27mt[27mW[27mS[27mi[27mv[27mK[27mz[27m_[27mX[27mM[27mS[27m0[27mm[27mt[27mU[27mL[27mI[27my[27mN[27mT[27mD[27mQ[27mU[27mU[27mr[27mO[27mL[27m8[27m0[27mr[27mA[27mb[27mF[27mr[27mA[27mb[27mU[27mX[27mS[27mg[27m4[27mc[27mA[27mA[27mA[27mA[?2004l[1B
+c_300097142_9bf08fbd-a5bf-4e04-81dd-662cb85fcc53   : 영오초등학교영현분교 수업일정                              
+c_300097142_9d853316-d7c7-4d0b-83fa-3dffe1fc6e33   : 방일초등학교 수업일정                                  
+c_300097142_9f7de0e1-28be-4c13-af10-84f2c6bd1e3b   : 시목초등학교 수업일정                                  
+c_300097142_9fbffe6c-7815-4d02-9aba-c83da009665b   : 옥계초등학교 수업일정                                  
+c_300097142_a037425b-139d-4ada-85c4-afcaf3ae1106   : 상곡초등학교 수업일정                                  
+c_300097142_a17e7fba-ba43-4410-89fb-1b5daeb64573   : 채운초등학교 수업일정                                  
+c_300097142_a2ebd812-00dd-451a-89b1-8ab9c2a8efcb   : 목동초등학교 수업일정                                  
+c_300097142_a3f0a6e6-a9fb-4c64-a57b-4eb955a0acb6   : 상천초등학교_춘천 수업일정                               
+c_300097142_a4b41212-2b30-439d-9cf4-62ba41814b9b   : 삼성초등학교 수업일정                                  
+c_300097142_a4ce3876-fc8f-40da-8da3-05b75478b18f   : 청평초등학교 수업일정                                  
+c_300097142_a5e98321-59ad-4920-a7a2-2769b0f796b9   : 음성중학교 수업일정                                   
+c_300097142_a5f335da-3ce0-4688-934f-bfa2d3f8065a   : 문막초등학교 수업일정                                  
+c_300097142_a61c301f-c788-4117-ae96-123021223003   : 고북초등학교 수업일정                                  
+c_300097142_a65b62a5-ceda-425f-a369-85256ca4d408   : 조치원대동초등학교 수업일정                               
+c_300097142_a66c166d-f69b-4dec-9cf2-2a94bc054d21   : 고산초등학교_당진 수업일정                               
+c_300097142_a7237b5a-4238-49c7-9a83-4eaa5eac0084   : 철성중학교 수업일정                                   
+Next Cursor : H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyNTXQUUrOL80rAbINagHYeemKHAAAAA
+[1m[7m%[27m[1m[0m                                                                                                                                                                                  ]7;file://pool-100-10-10-47.prvdri.fios.verizon.net/Users/fallenstar/Documents/GitHub/NaverWorks-API[0m[27m[24m[Jfallenstar@pool-100-10-10-47 NaverWorks-API % [K[?2004h python3 ./worksapi.py -ca --m admin@korec.by-works.com --cur H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyNTDQUUrOL80rAbFrAbUXSg4cAAAA| egrep "[7m [27m수업일정|Cursor"[K[A[160C[62D[60P[9C[27m수업일정|Cursor"[K[1B[K[A[108C[7mH[7m4[7ms[7mI[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mK[7mt[7mW[7mS[7mi[7mv[7mK[7mz[7m_[7mX[7mM[7mS[7m0[7mmtULIyNTXQUUrOL80rAbINagHYeemKHAAAAA[27m| egrep "수업일정|Cursor"[K[A[153C[62D[27mH[27m4[27ms[27mI[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mK[27mt[27mW[27mS[27mi[27mv[27mK[27mz[27m_[27mX[27mM[27mS[27m0[27mm[27mt[27mU[27mL[27mI[27my[27mN[27mT[27mX[27mQ[27mU[27mU[27mr[27mO[27mL[27m8[27m0[27mr[27mA[27mb[27mI[27mN[27ma[27mg[27mH[27mY[27me[27me[27mm[27mK[27mH[27mA[27mA[27mA[27mA[27mA | egrep "수업일정|Cursor"[A[153C[?2004l[1B
+c_300097142_a86672aa-86ed-48b8-b439-500c6f37fd2c   : 연서초등학교 수업일정                                  
+c_300097142_a8e5b828-1e3b-4520-8018-da52bd1def65   : 석포초등학교 수업일정                                  
+c_300097142_a99ee62e-9c17-487c-898c-ee7eb3492ff5   : 설악고등학교 수업일정                                  
+c_300097142_ac9b9b86-3e0c-4f11-8ee1-0c53828700f3   : 현산초등학교 수업일정                                  
+c_300097142_acb1839b-345b-4210-898b-e18f331b7e2e   : 조치원신봉초등학교 수업일정                               
+c_300097142_af07234f-241e-45e0-9e8a-ea783f36aec6   : 상천초등학교_가평 수업일정                               
+c_300097142_b1c33735-bbae-494f-b569-a9d9a5053c4b   : 염티초등학교 수업일정                                  
+c_300097142_b21c8174-d2b6-485c-8ca7-24bf63116773   : 상월초등학교 수업일정                                  
+c_300097142_b316a731-aa5b-435f-b187-5e137f2e8494   : 양신초등학교 수업일정                                  
+c_300097142_b3323e89-f973-4755-9bc3-a57ea63f4ab6   : 성대초등학교 수업일정                                  
+c_300097142_b3b95a33-056b-429d-8d3a-37d06d9235ea   : 가평북중학교 수업일정                                  
+c_300097142_b42c05f1-51da-479a-8c58-5111e6a558e1   : 운곡초등학교 수업일정                                  
+c_300097142_b52321d1-cfc1-4dec-9f87-d79ac8f441a9   : 남원용성초등학교 수업일정                                
+c_300097142_b8e9b3ad-50ac-4eed-9687-989b3455acc0   : 감성초등학교 수업일정                                  
+c_300097142_b967b54a-5cd0-4ade-8da6-7617cf870b7c   : 송화초등학교 수업일정                                  
+Next Cursor : H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyMzDQUUrOL80rUbIyNagFAMx9Nx8cAAAA
+[1m[7m%[27m[1m[0m                                                                                                                                                                                  ]7;file://pool-100-10-10-47.prvdri.fios.verizon.net/Users/fallenstar/Documents/GitHub/NaverWorks-API[0m[27m[24m[Jfallenstar@pool-100-10-10-47 NaverWorks-API % [K[?2004h python3 ./worksapi.py -ca --m admin@korec.by-works.com --cur H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyNTXQUUrOL80rAbINagHYeemKHAAAAA | egrep "수업일정|Cursor"[K[17D[A[172C[63D| egrep "수업일정|Cursor"[K[1B[K[A[108C[7mH[7m4[7ms[7mI[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mK[7mt[7mW[7mS[7mi[7mv[7mK[7mz[7m_[7mX[7mM[7mS[7m0[7mmtULIyMzDQUUrOL80rUbIyNagFAMx9Nx8cAAAA[27m| egrep "수업일정|Cursor"[K[A[153C[64D[27mH[27m4[27ms[27mI[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mK[27mt[27mW[27mS[27mi[27mv[27mK[27mz[27m_[27mX[27mM[27mS[27m0[27mm[27mt[27mU[27mL[27mI[27my[27mM[27mz[27mD[27mQ[27mU[27mU[27mr[27mO[27mL[27m8[27m0[27mr[27mU[27mb[27mI[27my[27mN[27ma[27mg[27mF[27mA[27mM[27mx[27m9[27mN[27mx[27m8[27mc[27mA[27mA[27mA[27mA[?2004l[1B
+c_300097142_ba7e1d48-03b5-4dab-bcd1-dfc07ab2fb84   : 산이초등학교 수업일정                                  
+c_300097142_bd8d3ba7-5c70-46cc-a045-1c55148b715b   : 금당초등학교 수업일정                                  
+c_300097142_be0826ae-92e7-4c84-b5d4-8439b319ecb6   : 전의초등학교 수업일정                                  
+c_300097142_bed2948e-25d3-4626-807a-c978d8be5cbd   : 상색초등학교 수업일정                                  
+c_300097142_bf66ccfa-5985-46a7-89f7-b3a6188df2b0   : 금병초등학교 수업일정                                  
+c_300097142_c1e4dac0-37ee-40e2-b626-712ed048be05   : 남양초등학교 수업일정                                  
+c_300097142_c37dd881-bd62-4e0f-a02f-96ec16a67cd5   : 수신초등학교 수업일정                                  
+c_300097142_c4cfcca0-8920-45eb-a5cd-3718fe08ddfd   : 송동중학교 수업일정                                   
+c_300097142_c4e3e1e7-9358-484a-9e3b-6ec530558f0b   : 가평초등학교 수업일정                                  
+c_300097142_c56da461-51ea-409a-b538-63e0cd2316a1   : 신양초등학교 수업일정                                  
+c_300097142_c5eee526-3311-4415-803d-7dd7b0c9be68   : 장평초등학교 수업일정                                  
+c_300097142_c6127169-c082-4b86-abbf-bebdd261c264   : 미산초등학교 수업일정                                  
+c_300097142_c6f88592-b626-418e-8499-08557026b11e   : 구만초등학교 수업일정                                  
+Next Cursor : H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyMzXQUUrOL80rUbIyNagFAKETlJscAAAA
+[1m[7m%[27m[1m[0m                                                                                                                                                                                  ]7;file://pool-100-10-10-47.prvdri.fios.verizon.net/Users/fallenstar/Documents/GitHub/NaverWorks-API[0m[27m[24m[Jfallenstar@pool-100-10-10-47 NaverWorks-API % [K[?2004h python3 ./worksapi.py -ca --m admin@korec.by-works.com --cur H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyMzDQUUrOL80rUbIyNagFAMx9Nx8cAAAA| egrep "수업일정|Cursor"[K[17D[A[172C[66D[1C[3C[1C[1C| egrep "수업일정|Cursor"[K[1B[K[A[108C[7mH[7m4[7ms[7mI[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mK[7mt[7mW[7mS[7mi[7mv[7mK[7mz[7m_[7mX[7mM[7mS[7m0[7mmtULIyMzXQUUrOL80rUbIyNagFAKETlJscAAAA[27m| egrep "수업일정|Cursor"[K[A[153C[64D[27mH[27m4[27ms[27mI[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mK[27mt[27mW[27mS[27mi[27mv[27mK[27mz[27m_[27mX[27mM[27mS[27m0[27mm[27mt[27mU[27mL[27mI[27my[27mM[27mz[27mX[27mQ[27mU[27mU[27mr[27mO[27mL[27m8[27m0[27mr[27mU[27mb[27mI[27my[27mN[27ma[27mg[27mF[27mA[27mK[27mE[27mT[27ml[27mJ[27ms[27mc[27mA[27mA[27mA[27mA | egrep "수업일정|Cursor"[A[153C[?2004l[1B
+c_300097142_cbe2852a-21cf-4a1a-8b17-d28e6e6cbdfb   : 설악중학교 수업일정                                   
+c_300097142_cbfd1e74-74d5-4bfe-ab68-69ca3050482f   : 흥양초등학교 수업일정                                  
+c_300097142_cd49f0ef-2503-4124-86bb-455dbb071dcb   : 청송초등학교 수업일정                                  
+c_300097142_ce3e44ae-0cee-4275-8593-2b14310bcfae   : 석성초등학교 수업일정                                  
+c_300097142_d0028072-38ad-4360-b7fa-0a3b1350388d   : 남원중앙초등학교 수업일정                                
+c_300097142_d02a80b4-b098-4602-92af-1acaec3d8c17   : 조치원교동초등학교 수업일정                               
+c_300097142_d0d88951-7583-43f5-a669-a64b2c9c556f   : 은하초등학교 수업일정                                  
+c_300097142_d15b0445-8329-4c3e-bd98-807bab76d2f3   : 하일초등학교 수업일정                                  
+c_300097142_d1a73065-d66b-43e8-9e3f-d73bc2487f85   : 초락초등학교 수업일정                                  
+c_300097142_d5391b1f-af5e-4124-b69d-513b92634211   : 반계초등학교 수업일정                                  
+c_300097142_d57a4f9b-748e-40c9-8092-e84602006be5   : 거류초등학교 수업일정                                  
+c_300097142_d82dd75e-6bb7-458b-8362-976b8e8fbe11   : 세종도원초등학교 수업일정                                
+c_300097142_d8ba36a9-7626-4497-a705-0771b17ac8de   : 합천초등학교 수업일정                                  
+c_300097142_da0384e0-b8db-4adc-851a-e3cdc849d79c   : 옥천초등학교 수업일정                                  
+Next Cursor : H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyNzDQUUrOL80rUbIyNagFACSmzKYcAAAA
+[1m[7m%[27m[1m[0m                                                                                                                                                                                  ]7;file://pool-100-10-10-47.prvdri.fios.verizon.net/Users/fallenstar/Documents/GitHub/NaverWorks-API[0m[27m[24m[Jfallenstar@pool-100-10-10-47 NaverWorks-API % [K[?2004h python3 ./worksapi.py -ca --m admin@korec.by-works.com --cur H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyMzXQUUrOL80rUbIyNagFAKETlJscAAAA | egrep "수업일정|Cursor"[K[17D[A[172C[65D| egrep "수업일정|Cursor"[K[1B[K[A[108C[7mH[7m4[7ms[7mI[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mK[7mt[7mW[7mS[7mi[7mv[7mK[7mz[7m_[7mX[7mM[7mS[7m0[7mmtULIyNzDQUUrOL80rUbIyNagFACSmzKYcAAAA[27m| egrep "수업일정|Cursor"[K[A[153C[64D[27mH[27m4[27ms[27mI[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mK[27mt[27mW[27mS[27mi[27mv[27mK[27mz[27m_[27mX[27mM[27mS[27m0[27mm[27mt[27mU[27mL[27mI[27my[27mN[27mz[27mD[27mQ[27mU[27mU[27mr[27mO[27mL[27m8[27m0[27mr[27mU[27mb[27mI[27my[27mN[27ma[27mg[27mF[27mA[27mC[27mS[27mm[27mz[27mK[27mY[27mc[27mA[27mA[27mA[27mA | egrep "수업일정|Cursor"[A[153C[?2004l[1B
+c_300097142_da6e0bbf-7314-4012-944d-c20166264b2e   : 호저초등학교 수업일정                                  
+c_300097142_db6cb465-c7a7-4d79-9e76-deb40e775050   : 송암초등학교 수업일정                                  
+c_300097142_db8d5474-bffb-4572-b5d5-024dd8bb001b   : 조종초등학교 수업일정                                  
+c_300097142_dc49cda6-d732-4ba4-94ca-47da6f8bac66   : 천북초등학교 수업일정                                  
+c_300097142_dd3659c5-002c-4dbd-9e44-b6ff12c7f96a   : 미원초등학교 위곡분교장 수업일정                            
+c_300097142_ddd58ecb-bbbe-4db8-b812-0801e0bd1de2   : 신사초등학교 수업일정                                  
+c_300097142_df3c11c1-5917-4a43-b4ef-107b6ab38eb0   : 강당초등학교 수업일정                                  
+c_300097142_dfe0681d-92b1-4056-95b7-6ba95aed0335   : 반포초등학교 수업일정                                  
+c_300097142_e06efb0f-1ffe-474d-9f24-b3cbd2d0a442   : 원남초등학교 수업일정                                  
+c_300097142_e0c75b25-2be3-49e0-a4ed-493e00bd33f3   : 광석중학교 수업일정                                   
+c_300097142_e20d585b-36f2-41c5-9c8a-17d42cbd5e1a   : 모항초등학교 수업일정                                  
+c_300097142_e4150d8c-af2c-4147-9411-9f5248f790ba   : 청평고등학교 수업일정                                  
+c_300097142_e5054ba8-6307-4671-b02f-4e8fc4a26a22   : 연봉초등학교 수업일정                                  
+c_300097142_e65b0555-0b4a-4fbd-9354-9c5cf6ed54ae   : 남이초등학교 수업일정                                  
+c_300097142_e6b747d5-5a35-4320-9e67-653fccc7643e   : 황둔초등학교 수업일정                                  
+c_300097142_e6ed9069-2420-47de-9b2a-6a89f8a41755   : 도촌초등학교 수업일정                                  
+c_300097142_e8d02945-e4d7-450b-ae54-cc2d8b2127a2   : 운신초등학교 수업일정                                  
+Next Cursor : H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyNzXQUUrOL80rUbIyNagFAEnIbyIcAAAA
+[1m[7m%[27m[1m[0m                                                                                                                                                                                  ]7;file://pool-100-10-10-47.prvdri.fios.verizon.net/Users/fallenstar/Documents/GitHub/NaverWorks-API[0m[27m[24m[Jfallenstar@pool-100-10-10-47 NaverWorks-API % [K[?2004h python3 ./worksapi.py -ca --m admin@korec.by-works.com --cur H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyNzDQUUrOL80rUbIyNagFACSmzKYcAAAA | egrep "수업일정|Cursor"[K[17D[A[172C[65D| egrep "수업일정|Cursor"[K[1B[K[A[108C[7mH[7m4[7ms[7mI[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mK[7mt[7mW[7mS[7mi[7mv[7mK[7mz[7m_[7mX[7mM[7mS[7m0[7mmtULIyNzXQUUrOL80rUbIyNagFAEnIbyIcAAAA[27m| egrep "수업일정|Cursor"[K[A[153C[64D[27mH[27m4[27ms[27mI[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mK[27mt[27mW[27mS[27mi[27mv[27mK[27mz[27m_[27mX[27mM[27mS[27m0[27mm[27mt[27mU[27mL[27mI[27my[27mN[27mz[27mX[27mQ[27mU[27mU[27mr[27mO[27mL[27m8[27m0[27mr[27mU[27mb[27mI[27my[27mN[27ma[27mg[27mF[27mA[27mE[27mn[27mI[27mb[27my[27mI[27mc[27mA[27mA[27mA[27mA | egrep "수업일정|Cursor"[A[153C[?2004l[1B
+c_300097142_e8ed455f-6413-4ddb-9a15-547f74688fed   : 청파초등학교 수업일정                                  
+c_300097142_eb525e8e-fef8-4958-b980-fe38f1a2a77c   : 화동초등학교 수업일정                                  
+c_300097142_ebc82dec-d752-4eaa-843f-083086932e8d   : 소정초등학교 수업일정                                  
+c_300097142_ed8f4ce2-99d9-4d56-a007-a9d49f3248fd   : 비두초등학교 수업일정                                  
+c_300097142_efcda86c-ee87-42db-b57c-4c5f77c3083b   : 대창초등학교 수업일정                                  
+c_300097142_f151264e-4817-4693-a59a-430ebb003af9   : 거산초등학교 수업일정                                  
+c_300097142_f348dc16-407e-4034-83f3-d710245b2d88   : 가평고등학교 수업일정                                  
+c_300097142_f3c9e8df-0105-4289-8625-929e2a8afb90   : 신풍초등학교 수업일정                                  
+c_300097142_f5384dea-eafe-4506-8c48-0638fa5cac30   : 충화초등학교 수업일정                                  
+c_300097142_f5a8270f-8561-4312-9972-69455af0d84c   : 송학초등학교 수업일정                                  
+c_300097142_f683afb0-e65b-497c-8a0a-784cc3c66c6f   : 신대초등학교 수업일정                                  
+c_300097142_f767dd06-c83b-4905-b81b-7ed976b7ad8e   : 덕암초등학교 수업일정                                  
+c_300097142_f85a5618-f5c2-4fd6-af69-745c414afb91   : 대왕초등학교 수업일정                                  
+c_300097142_f992bab3-9dbe-4960-8dc0-5e5bc46e73cd   : 청룡초등학교_음성 수업일정                               
+c_300097142_fb2f6419-a18b-4524-95a8-7db405469a83   : 남일초등학교 수업일정                                  
+Next Cursor : H4sIAAAAAAAAAKtWSivKz_XMS0mtULKyMDDQUUrOL80rUbIyNagFALllRPIcAAAA
+[1m[7m%[27m[1m[0m                                                                                                                                                                                  ]7;file://pool-100-10-10-47.prvdri.fios.verizon.net/Users/fallenstar/Documents/GitHub/NaverWorks-API[0m[27m[24m[Jfallenstar@pool-100-10-10-47 NaverWorks-API % [K[?2004h python3 ./worksapi.py -ca --m admin@korec.by-works.com --cur H4sIAAAAAAAAAKtWSivKz_XMS0mtULIyNzXQUUrOL80rUbIyNagFAEnIbyIcAAAA | egrep "수업일정|Cursor"[K[17D[A[172C[65D| egrep "수업일정|Cursor"[K[1B[K[A[108C[7mH[7m4[7ms[7mI[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mA[7mK[7mt[7mW[7mS[7mi[7mv[7mK[7mz[7m_[7mX[7mM[7mS[7m0[7mmtULKyMDDQUUrOL80rUbIyNagFALllRPIcAAAA[27m| egrep "수업일정|Cursor"[K[A[153C[64D[27mH[27m4[27ms[27mI[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mA[27mK[27mt[27mW[27mS[27mi[27mv[27mK[27mz[27m_[27mX[27mM[27mS[27m0[27mm[27mt[27mU[27mL[27mK[27my[27mM[27mD[27mD[27mQ[27mU[27mU[27mr[27mO[27mL[27m8[27m0[27mr[27mU[27mb[27mI[27my[27mN[27ma[27mg[27mF[27mA[27mL[27ml[27ml[27mR[27mP[27mI[27mc[27mA[27mA[27mA[27mA | egrep "수업일정|Cursor"[A[153C[?2004l[1B
+c_300097142_fb4bfc9b-0288-49b3-9972-130330cc9837   : 가야곡초등학교 수업일정                                 
+c_300097142_fb5b1e44-b8be-4553-98e4-b9791f193b2a   : 강경중앙초등학교 수업일정                                
+c_300097142_fb71379d-50c9-45d9-8b61-adea9e0fe04f   : 화원초등학교 수업일정                                  
+c_300097142_fc77a0ed-79dd-4bf3-8c20-b74ee5f3638c   : 남원대산초등학교 수업일정                                
+c_300097142_fc92c29e-7173-4d98-8ac9-ca36eba5731f   : 명호초등학교 수업일정                                  
+c_300097142_fcf6d2f5-5a83-4afc-8e81-5612cd3e486f   : 귀래초등학교 수업일정                                  
+c_300097142_fd660bf0-7bb5-4476-9381-a65c1804de1b   : 소원초등학교 수업일정                                  
+c_300097142_fdd7ae2f-480d-444e-8111-534a1cd2220d   : 산내초등학교 수업일정                                  
+c_300097142_fe1deadd-38d6-4c6f-8f6d-a41e2470315e   : 산이서초등학교 수업일정                                 
+c_300097142_ff3f8799-3ea7-4b52-9915-2267d7519ba4   : 삼산초등학교_고성 수업일정                               
+[1m[7m%[27m[1m[0m                                                                                                                                                                                  ]7;file://pool-100-10-10-47.prvdri.fios.verizon.net/Users/fallenstar/Documents/GitHub/NaverWorks-API[0m[27m[24m[Jfallenstar@pool-100-10-10-47 NaverWorks-API % [K[?2004h python3 ./worksapi.py -ca --m admin@korec.by-works.com --cur H4sIAAAAAAAAAKtWSivKz_XMS0mtULKyMDDQUUrOL80rUbIyNagFALllRPIcAAAA | egrep "수업일정|Cursor"[K[17D[A[172C[65D| egrep "수업일정|Cursor"[K[1B[K[A[108C[62D                                                                                       [87Deexit[?2004l[1B
+Saving session...
+...saving history...truncating history files...
+...completed.
+
+Script done on Fri Sep  1 11:13:48 2023

@@ -23,8 +23,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     print(args)
 
-    
-    
     if args.c:
         if args.client == None or args.redirect == None or args.scope == None:
             print("Parameters not set")
