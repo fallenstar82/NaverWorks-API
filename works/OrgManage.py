@@ -31,3 +31,65 @@ class OrgManage:
 
         return result
 
+    def addOrg(self, 
+               domainId : str, 
+               orgName : str, 
+               sortOrder : int, 
+               parentOrgId : str = None, 
+               extKey : str = None, 
+               orgMail : str = None, 
+               aliasEmail : list = None, 
+               allowSender : list = None, 
+               receiveMail : bool = False, 
+               useMessage : bool = False, 
+               useNote : bool = False, 
+               useCalendar : bool = False, 
+               useTask :bool = False, 
+               useFolder :bool = False, 
+               useServerNotification :bool = False, 
+               visibleOrg : bool = True, 
+               orgDescription : str = None):
+        
+        headers = {
+            "Authorization": "Bearer " + self.accessToken,
+            "Content-Type" : "application/json"
+        }
+
+        params = {
+            "domainId": domainId,
+            "orgUnitName": orgName,
+            "displayOrder" : sortOrder,
+            "visible" : visibleOrg
+        }
+
+        # Optional Parameters Setting
+        if parentOrgId:
+            params["parentOrgUnitId"] = parentOrgId
+        if extKey:
+            params["orgUnitExternalKey"] = extKey
+        if orgMail:
+            params["email"] = orgMail
+        if aliasEmail:
+            params["aliasEmails"] = aliasEmail
+        if allowSender:
+            params["membersAllowedToUseOrgUnitEmailAsRecipient"] = allowSender
+        if receiveMail:
+            params["canReceiveExternalMail"] = receiveMail
+        if useMessage:
+            params["useMessage"] = True
+            if useNote:
+                params["useNote"] = True
+            if useCalendar:
+                params["useCalendar"] = True
+            if useTask:
+                params["useTask"] = True
+            if useFolder:
+                params["useFolder"] = True
+        if useServerNotification:
+            params["useServiceNotification"] = True
+        if orgDescription:
+            params["description"] = orgDescription
+        
+        result = requests.post(self.__url, headers=headers, json=params).json()
+        return result
+

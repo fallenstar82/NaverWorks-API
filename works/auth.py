@@ -2,7 +2,7 @@ import jwt
 import requests
 import webbrowser
 from urllib.parse import urlencode
-from common.HelpMessage import HelpMessage
+from works.HelpMessage import HelpMessage
 from time import time
 
 class AuthByJWT:
@@ -77,12 +77,11 @@ class AuthByOAuth:
         if (args.c == None or args.r == None or args.o == None or args.s == None):
             HelpMessage(self.mainCategory, self.operationCategory)
         else:
-            print(args)
             operationCategory = "AuthByWeb_Auth"
             url = "https://auth.worksmobile.com/oauth2/v2.0/authorize"
             if args.c == None or args.r == None or args.o == None:
                 HelpMessage(self.mainCategory, operationCategory)
-                exit
+                exit(1)
             else:
                 scopes = ''
                 for x in range(0,len(args.o)):
@@ -100,7 +99,7 @@ class AuthByOAuth:
 
                 url = "https://auth.worksmobile.com/oauth2/v2.0/token"
                 headers = {
-                "Content-Type" : "application/x-www-form-urlencoded"
+                    "Content-Type" : "application/x-www-form-urlencoded"
                 }
 
                 data = {
@@ -118,8 +117,10 @@ class AuthByOAuth:
                     print("Oauth Error")
                     print(" | ERROR : " + result["error"])
                     print(" | DESCRIPTION : " + result["error_description"])
+                    exit(1)
                 else:
                     outFile = args.f if args.f != None else 'ak.token'
+                    
                     with open (outFile, 'w') as f:
                         f.write(result["access_token"])
                 

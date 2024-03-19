@@ -1,1 +1,1 @@
-python3 ./run.py A -t jwt -s bCUu3CSfRk -c df1vPzpc6IOmc6WOYySg -o user group calendar orgunit directory file -k private.key -a x89pn.serviceaccount@goodusdata.by-works.com 
+python3 ./worksapi.py auth -t jwt -s 0853jntEE2 -c mNuPd9gs5ZB3g4WktegA -o user group calendar orgunit directory file -k private_gyo.key -a 8avks.serviceaccount@korec.by-works.com

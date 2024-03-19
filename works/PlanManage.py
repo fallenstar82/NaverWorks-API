@@ -26,17 +26,18 @@ class PlanManage:
         return startDateString, endDateString
 
     def queryPlan(self, memberId : str, calendarId : str, eventId : str, targetym : str):
+        url = self.__url
         params = {}
 
         headers = {
             "Authorization": "Bearer " + self.accessToken
         }
 
-        self.__url += "/"+memberId
+        url += "/"+memberId
         if calendarId != None:
-            self.__url += "/calendars/"+calendarId+"/events"
+            url += "/calendars/"+calendarId+"/events"
             if eventId != None:
-                self.__url += "/"+eventId
+                url += "/"+eventId
             else:
                 if targetym == None:
                     print("List plan query needs target year-month.(ex: 2024-03)")
@@ -46,9 +47,9 @@ class PlanManage:
                     params["fromDateTime"]  = startDate
                     params["untilDateTime"] = endDate
         else:
-            self.__url += "/calendar/events"
+            url += "/calendar/events"
             if eventId != None:
-                self.__url += "/"+eventId
+                url += "/"+eventId
             else:
                 if targetym == None:
                     print("List plan query needs target year-month.(ex: 2024-03)")
@@ -59,7 +60,7 @@ class PlanManage:
                     params["untilDateTime"] = endDate
                     print(params)
 
-        result = requests.get(self.__url, headers = headers, params = params).json()
+        result = requests.get(url, headers = headers, params = params).json()
 
         if 'code' in result:
             pprint.pprint(result, indent=2)
