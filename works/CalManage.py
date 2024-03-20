@@ -3,7 +3,7 @@ import pprint
 class CalManage:
 
     accessToken  : str
-    __url = ""
+    __url = "https://www.worksapis.com/v1.0"
         
     def __init__(self, token : str):
         self.accessToken = token
@@ -15,33 +15,26 @@ class CalManage:
 
         if isPersonal:
             if calId == None and memberId != None:
-                self.__url="https://www.worksapis.com/v1.0/users/"+memberId+"/calendar-personals"
+                url = self.__url + "/users/"+memberId+"/calendar-personals"
             elif calId != None and memberId != None:
-                self.__url="https://www.worksapis.com/v1.0/users/"+memberId+"/calendar-personals/"+calId
+                url = self.__url + "/users/" + memberId + "/calendar-personals/" + calId
             else:
-                print("Personal Calendar Must set member ID. Calendar ID is Optional.")
-                exit(1)
+                return {"error" : "Personal Calendar Must set member ID. Calendar ID is Optional."}
         elif isShare:
             if calId == None and memberId != None:
-                self.__url="https://www.worksapis.com/v1.0/users/"+memberId+"/calendar"
+                url = self.__url + "/users/" + memberId + "/calendar"
             elif calId != None and memberId == None:
-                self.__url="https://www.worksapis.com/v1.0/calendars/"+calId
+                url = self.__url + "/calendars/" + calId
             else:
-                print("Share Calendar needs only one of Member ID or Calendar ID")
-                exit(1)
+                return {"error" : "Share Calendar needs only one of Member ID or Calendar ID"}
         else:
-            print("You should have designate Personal or Shared calendar")
-            exit(1)
+            return {"error": "You should have designate Personal or Shared calendar"}
 
         params = {
             "cursor" : cursor
         }
 
-        result = requests.get(self.__url, headers = headers, params = params).json()
-
-        if 'code' in result:
-            pprint.pprint(result, indent=2)
-            exit(1)
+        result = requests.get(url, headers = headers, params = params).json()
 
         return result
 
