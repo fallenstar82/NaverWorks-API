@@ -329,12 +329,9 @@ Optional:
 | --- | --- | --- | --- |
 | -f | N | file name | Access Token 파일. 기본값 ak.token |
 | -m | Y | member Id | 일정을 조회할 사용자의 아이디 |
-| --cid | N | Calendar Id | 사용자가 접근 가능한 캘린더의 아이디.
-제공하지 않을 경우 기본 캘린더의 일정 표출 |
-| --eid | N | Event Id | 특정 이벤트 아이디.
-제공하지 않을 경우 전체 일정 출력 |
-| --targetym | N | YYYY-MM | --eid 를 제공하지 않을 경우 반드시 필요.
-조회하고자 하는 년-월. |
+| --cid | N | Calendar Id | 사용자가 접근 가능한 캘린더의 아이디.<br>제공하지 않을 경우 기본 캘린더의 일정 표출 |
+| --eid | N | Event Id | 특정 이벤트 아이디.<br>제공하지 않을 경우 전체 일정 출력 |
+| --targetym | N | YYYY-MM | --eid 를 제공하지 않을 경우 반드시 필요.<br>조회하고자 하는 년-월. |
 
 ### Example
 
@@ -450,31 +447,16 @@ Etc Options:
 | --- | --- | --- | --- |
 | -f | N | file name | Access Token 파일. 기본값 ak.token |
 | -m | Y | member Id | 일정을 조회할 사용자의 아이디 |
-| --cid | N | Calendar Id | 사용자가 접근 가능한 캘린더의 아이디.
-제공하지 않을 경우 기본 캘린더에 추가 |
+| --cid | N | Calendar Id | 사용자가 접근 가능한 캘린더의 아이디.<br>제공하지 않을 경우 기본 캘린더에 추가 |
 | --summary | Y | Summary | 일정 요약. 주로 제목으로 사용된다. |
-| --targetym | N | YYYY-MM | --eid 를 제공하지 않을 경우 반드시 필요.
-조회하고자 하는 년-월. |
 
 **Required Option - Date**
 
 | PARAMETER | REQUIRED | VALUE | DESCRIPTION |
 | --- | --- | --- | --- |
-| --type | Y | all|time | all
-  하루 종일 일정
-time
-  특정 시간 일정 |
-| --start | Y | 날짜&시간 | 일정의 시작 시점
- 하루 종일 일정
-  yyyy-mm-dd
- 시간 일정
-  yyyy-mm-ddThh:mm:ss |
-| --end | N | 날짜&시간 | 일정의 종료 시점
- 하루 종일 일정
-  yyyy-mm-dd
-  종일 일정은 종료 날짜는 일정에 포함되지 않음
- 시간 일정
-  yyyy-mm-ddThh:mm:ss |
+| --type | Y | all|time | all<br>  하루 종일 일정<br>time<br>  특정 시간 일정 |
+| --start | Y | 날짜&시간 | 일정의 시작 시점<br> 하루 종일 일정<br>  yyyy-mm-dd<br> 시간 일정<br>  yyyy-mm-ddThh:mm:ss |
+| --end | N | 날짜&시간 | 일정의 종료 시점<br> 하루 종일 일정<br>  yyyy-mm-dd<br>  종일 일정은 종료 날짜는 일정에 포함되지 않음<br> 시간 일정<br>  yyyy-mm-ddThh:mm:ss |
 | --tz | N | Timezone | 타임존. 기본적으로 Asia/Seoul |
 
 **Optional - Attendee**
@@ -485,30 +467,22 @@ time
 | --- | --- | --- | --- |
 | --attid | N | attendee Id | 참석자의 ID 혹은 Email |
 | --attdpname | N | 표시 이름 | 참석자의 표시 이름 |
-| --partstat | N | 참석자 상태 | need-action 응답 대기
-accepted    참석
-tentative   미정
-declined    거절 |
-
+| --partstat | N | 참석자 상태 | need-action 응답 대기<br>accepted    참석<br>tentative   미정<br>declined    거절 |
 **Optional - Recurrency (반복)**
 
 | PARAMETER | REQUIRED | VALUE | DESCRIPTION |
 | --- | --- | --- | --- |
 | --recfreq | N | 반복 주기 | WEEKLY, MONTHLY 등 iCal format 참조 |
-| --recuntil | N | 반복 종료일 | YYYYMMDDTHHmmssZ 형식
- ex)20250101T000000Z |
-| --recint | N | 반복 간격 | 반복의 간격을 지정한다.
---recfreq 가 weekly 일 때 해당 값을 3 으로 설정 시 3주에 한번이 된다. |
-| --recbt | N | BY형식 | BYDAY, BYMONTH 등의 값을 갖는다.
-iCal format 참조 |
+| --recuntil | N | 반복 종료일 | YYYYMMDDTHHmmssZ 형식<br> ex)20250101T000000Z |
+| --recint | N | 반복 간격 | 반복의 간격을 지정한다.<br>--recfreq 가 weekly 일 때 해당 값을 3 으로 설정 시 3주에 한번이 된다. |
+| --recbt | N | BY형식 | BYDAY, BYMONTH 등의 값을 갖는다.<br>iCal format 참조 |
 | --recbtv | N | BY형식의 값 | --recbt 가 BYDAY 이며, --recbtv 가 MO 이고 --recfreq 가 WEEKLY 일 경우 매주 월요일이 된다. |
 
 **Optinal - Recurrency Exception(반복 중 제외)**
 
 | PARAMETER | REQUIRED | VALUE | DESCRIPTION |
 | --- | --- | --- | --- |
-| --reex | N | 날짜 | 반복중 제외 일자를 선언
-ex)20240301T000000Z |
+| --reex | N | 날짜 | 반복중 제외 일자를 선언<br>ex)20240301T000000Z |
 
 **Optional - Video Meeting**
 
@@ -525,12 +499,8 @@ ex)20240301T000000Z |
 
 | PARAMETER | REQUIRED | VALUE | DESCRIPTION |
 | --- | --- | --- | --- |
-| --almethod | N | display | email | display
- 앱 푸시 화면으로 알람을 전달
-email
- 등록된 이메일로 알람 전달 |
-| --altrigger | N | 트리거 | PT0s, PT15M 등 ical 포멧에 맞는 트리거를 설정하며 앞의 -는 제외한다.
-원래 -PT15M 이어야 하나 편의상 - 제거 |
+| --almethod | N | display or email | display<br> 앱 푸시 화면으로 알람을 전달<br>email<br> 등록된 이메일로 알람 전달 |
+| --altrigger | N | 트리거 | PT0s, PT15M 등 ical 포멧에 맞는 트리거를 설정하며 앞의 -는 제외한다.<br>원래 -PT15M 이어야 하나 편의상 - 제거 |
 
 **Optional - Map**
 
@@ -538,10 +508,8 @@ email
 
 | PARAMETER | REQUIRED | VALUE | DESCRIPTION |
 | --- | --- | --- | --- |
-| --mtype | N | Map 제공자 | 맵 제공자에 대한 정보
-ex) google, naver |
-| --geo | N | 위경도 | 위경도를 표현한다.
-ex) “40.7486484;-73.98400699999999" |
+| --mtype | N | Map 제공자 | 맵 제공자에 대한 정보<br>ex) google, naver |
+| --geo | N | 위경도 | 위경도를 표현한다.<br>ex) “40.7486484;-73.98400699999999" |
 
 **Optional - Map Url**
 
@@ -556,11 +524,9 @@ ex) “40.7486484;-73.98400699999999" |
 | --- | --- | --- | --- |
 | --eid | N | Event Id | 이벤트 아이디 (사용자 정의) |
 | --category | N | Id | 사용자 정의 카테고리 아이디 |
-| --visibility | N | pubilc | private | 기본값 public
-다른 사용자에게 표출될지 여부를 설정. |
+| --visibility | N | pubilc | private | 기본값 public<br>다른 사용자에게 표출될지 여부를 설정. |
 | --sequence | N | int | 변경 시퀀스 번호 |
-| --transparency | N | opaque | transparent | 일정의 상태 정보.
-기본값 opaque(바쁨) 으로 설정 |
+| --transparency | N | opaque | transparent | 일정의 상태 정보.<br>기본값 opaque(바쁨) 으로 설정 |
 | --location | N | Location | 위치 정보. 일반적인 텍스트. |
 | --description | N | description | 주석 |
 
