@@ -25,7 +25,7 @@
         - 추가, 삭제, 조회 등등
     
     ```
-    **worksapi.py** MainCommand SubCommand *[Option]*
+    worksapi.py MainCommand SubCommand [Option]
     
     ex)
     worksapi.py user query
@@ -34,7 +34,7 @@
 - 도움말이 필요할 경우 `-h` 를 사용하며 각 커맨드에 따른 도움 화면이 표출된다.
     
     ```
-    **worksapi.py -h**
+    worksapi.py -h
     
     WORKS | WORKSPLACE API Management Program V2
     
@@ -66,7 +66,7 @@
 각 단계에서 `-h` 옵션을 통해 도움말을 확인 할 수 있다.
 
 ```
-**worksapi.py user -h**
+worksapi.py user -h
 usage: run.py user [-h] {query,add,delete,update} ...
 
 positional arguments:
@@ -82,7 +82,7 @@ optional arguments:
 ```
 
 ```
-**worksapi.py user query -h**
+worksapi.py user query -h
 usage: run.py user query [-h] [-t Filename] [-m Email|Id] [-d domain] [-n number] [-c cursor]
 
 optional arguments:
@@ -174,7 +174,7 @@ OAuth 를 이용하기 위해서는 개발자 콘솔에 미리 Redirect URL 을 
 기본적인 정보를 가지로 인증 절차를 시작한다.
 
 ```
-**worksapi.py** auth \
+worksapi.py auth \
 -t oauth \
 -c df1vPzpc6IOmc6WOYySg \
 -s bCUu3CSfRk \
